@@ -1,10 +1,9 @@
 import React from "react"
-import { MapContainer, TileLayer, Polygon, useMap, Marker, Popup, Circle } from 'react-leaflet'
-import { data } from "./data"
-import { Icon } from "leaflet"
+import { MapContainer, TileLayer, Polygon, Popup, LayersControl } from 'react-leaflet'
+import { juarez, colonias } from "./data"
 import './App.css';
 
-const redOptions = { color: 'red' }
+console.log(colonias.features)
 
 function App() {
   return (
@@ -13,14 +12,16 @@ function App() {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
+      <LayersControl position="topright">
+      <LayersControl.Overlay name="Juárez">
       {
-        data.features.map((coord) => {
+        juarez.features.map((coord) => {
           const coordinates = coord.geometry.coordinates[0]
 
           return (
             <Polygon
             pathOptions={{
-              fillColor: "#ff8f23",
+              fillColor: "#f23302",
               fillOpacity: 0.7,
               weight: 2,
               opacity: 1,
@@ -35,9 +36,10 @@ function App() {
           )
         })
       }
-      {/* <Marker position={[31.687155193758485, -106.42686638757755]}>
-
-      </Marker> */}
+      </LayersControl.Overlay>
+      <LayersControl.Overlay checked name="Colonias">
+      </LayersControl.Overlay>
+    </LayersControl>
     </MapContainer>
   );
 }
