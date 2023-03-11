@@ -4,8 +4,9 @@ import { juarez, colonias } from "./data"
 import proj4 from 'proj4';
 import './App.css';
 
-proj4.defs("EPSG:4326","+proj=longlat +datum=WGS84 +no_defs");
-proj4.defs("EPSG:25830","+proj=utm +zone=13 +datum=WGS84 +units=m +no_defs';");
+const current = '+proj=utm +zone=13 +datum=WGS84 +units=m +no_defs';
+          
+const target = 'EPSG:4326';
 
 function App() {
   return (
@@ -39,18 +40,18 @@ function App() {
         })
       }
       </LayersControl.Overlay>
-      <LayersControl.Overlay checked name="Colonias">
+      <LayersControl.Overlay name="Colonias">
         {
-          colonias.features.map((coord) => {
-            const coordinates = coord.geometry.coordinates[0];
+        colonias.features.map((coord) => {
+          const coordinates = coord.geometry.coordinates[0];
 
-            const transformedCoords = coordinates.map((coord) =>
-            proj4('EPSG:25830', 'EPSG:4326', coord));
+          const formatCoordinates = coordinates.map((coord) => {
+            const newCoord = proj4(current, target).forward(coord);
+            return [newCoord[1], newCoord[0]];
+          });
 
-            const swappedCoords = transformedCoords.map((coord) => [coord[1], coord[0]]);
-
-            return (
-              <Polygon
+          return (
+            <Polygon
               pathOptions={{
                 fillColor: "#f23302",
                 fillOpacity: 0.7,
@@ -59,10 +60,10 @@ function App() {
                 dashArray: "3",
                 color: 'black'
               }}
-              positions={swappedCoords}>
-              </Polygon>
-            )
-          })
+              positions={formatCoordinates}>
+            </Polygon>
+          )
+        })
         }
       </LayersControl.Overlay>
     </LayersControl>
