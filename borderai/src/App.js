@@ -1,7 +1,6 @@
 import React from "react"
 import { MapContainer, TileLayer, Polygon, Popup, LayersControl, FeatureGroup } from 'react-leaflet'
-import { juarez, colonias, usa } from "./data"
-import proj4 from 'proj4';
+import { juarez, colonias} from "./data"
 import './App.css';
 
 const current = '+proj=utm +zone=13 +datum=WGS84 +units=m +no_defs';
