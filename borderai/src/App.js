@@ -3,11 +3,6 @@ import { MapContainer, TileLayer, Polygon, Popup, LayersControl, FeatureGroup } 
 import { juarez, colonias} from "./data"
 import './App.css';
 
-const current = '+proj=utm +zone=13 +datum=WGS84 +units=m +no_defs';
-          
-const target = 'EPSG:4326';
-
-
 function App() {
   return (
     <MapContainer center={[31.446364799515877, -106.63501426130038]} zoom={10} scrollWheelZoom={false}>
