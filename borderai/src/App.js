@@ -24,12 +24,12 @@ function App() {
           return (
             <Polygon
             pathOptions={{
-              fillColor: "#f23302",
+              fillColor: "#ec4921",
               fillOpacity: 0.7,
               weight: 2,
               opacity: 1,
               dashArray: "3",
-              color: 'black'
+              color: '#252627'
             }}
             positions={coordinates}>
               <Popup>
@@ -41,50 +41,34 @@ function App() {
       }
       </LayersControl.Overlay>
       <LayersControl.Overlay name="Colonias">
-        <FeatureGroup pathOptions={{ color: 'purple' }}>
+        <FeatureGroup pathOptions={{ color: '#252627' }}>
           {
             colonias.features.map((coord) => {
               const coordinates = coord.geometry.coordinates[0].map((item) => [item[1], item[0]]);
+
+              const name = coord.properties.name;
+
+              const type = coord.properties.TIPO;
               
               return (
                 <Polygon
                   pathOptions={{
-                    fillColor: "#f23302",
+                    fillColor: "#32a6b3",
                     fillOpacity: 0.7,
                     weight: 2,
                     opacity: 1,
                     dashArray: "3",
-                    color: 'black'
+                    color: '#252627'
                   }}
                   positions={coordinates}>
+                  <Popup>
+                    {type}, {name}
+                  </Popup>
                 </Polygon>
               )
             })
           }
         </FeatureGroup>
-      </LayersControl.Overlay>
-      <LayersControl.Overlay name="USA">
-        <FeatureGroup pathOptions={{ color: 'purple' }}>
-          {
-            usa.features.map((coord) => {
-              const coordinates = coord.geometry.coordinates[0].map((item) => [item[1], item[0]])
-
-              return (
-                <Polygon
-                pathOptions={{
-                  fillColor: "#f23302",
-                  fillOpacity: 0.7,
-                  weight: 2,
-                  opacity: 1,
-                  dashArray: "3",
-                  color: 'black'
-                }}
-                positions={coordinates}>
-                </Polygon>
-              )
-            })
-          }
-          </FeatureGroup>
       </LayersControl.Overlay>
     </LayersControl>
     </MapContainer>
