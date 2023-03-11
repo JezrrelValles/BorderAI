@@ -1,12 +1,13 @@
 import React from "react"
-import { MapContainer, TileLayer, Polygon, Popup, LayersControl } from 'react-leaflet'
-import { juarez, colonias } from "./data"
+import { MapContainer, TileLayer, Polygon, Popup, LayersControl, FeatureGroup } from 'react-leaflet'
+import { juarez, colonias, usa } from "./data"
 import proj4 from 'proj4';
 import './App.css';
 
 const current = '+proj=utm +zone=13 +datum=WGS84 +units=m +no_defs';
           
 const target = 'EPSG:4326';
+
 
 function App() {
   return (
@@ -41,30 +42,50 @@ function App() {
       }
       </LayersControl.Overlay>
       <LayersControl.Overlay name="Colonias">
-        {
-        colonias.features.map((coord) => {
-          const coordinates = coord.geometry.coordinates[0];
+        <FeatureGroup pathOptions={{ color: 'purple' }}>
+          {
+            colonias.features.map((coord) => {
+              const coordinates = coord.geometry.coordinates[0].map((item) => [item[1], item[0]]);
+              
+              return (
+                <Polygon
+                  pathOptions={{
+                    fillColor: "#f23302",
+                    fillOpacity: 0.7,
+                    weight: 2,
+                    opacity: 1,
+                    dashArray: "3",
+                    color: 'black'
+                  }}
+                  positions={coordinates}>
+                </Polygon>
+              )
+            })
+          }
+        </FeatureGroup>
+      </LayersControl.Overlay>
+      <LayersControl.Overlay name="USA">
+        <FeatureGroup pathOptions={{ color: 'purple' }}>
+          {
+            usa.features.map((coord) => {
+              const coordinates = coord.geometry.coordinates[0].map((item) => [item[1], item[0]])
 
-          const formatCoordinates = coordinates.map((coord) => {
-            const newCoord = proj4(current, target).forward(coord);
-            return [newCoord[1], newCoord[0]];
-          });
-
-          return (
-            <Polygon
-              pathOptions={{
-                fillColor: "#f23302",
-                fillOpacity: 0.7,
-                weight: 2,
-                opacity: 1,
-                dashArray: "3",
-                color: 'black'
-              }}
-              positions={formatCoordinates}>
-            </Polygon>
-          )
-        })
-        }
+              return (
+                <Polygon
+                pathOptions={{
+                  fillColor: "#f23302",
+                  fillOpacity: 0.7,
+                  weight: 2,
+                  opacity: 1,
+                  dashArray: "3",
+                  color: 'black'
+                }}
+                positions={coordinates}>
+                </Polygon>
+              )
+            })
+          }
+          </FeatureGroup>
       </LayersControl.Overlay>
     </LayersControl>
     </MapContainer>
