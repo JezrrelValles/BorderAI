@@ -1,6 +1,6 @@
 import React from "react"
 import { MapContainer, TileLayer, Polygon, Popup, LayersControl, FeatureGroup } from 'react-leaflet'
-import { juarez, colonias} from "./data"
+import { juarez, colonias, distrito5} from "./data"
 import './App.css';
 
 function App() {
@@ -11,7 +11,7 @@ function App() {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       <LayersControl position="topright">
-      <LayersControl.Overlay name="Juárez">
+      <LayersControl.Overlay checked name="Juárez">
       {
         juarez.features.map((coord) => {
           const coordinates = coord.geometry.coordinates[0]
@@ -19,11 +19,11 @@ function App() {
           return (
             <Polygon
             pathOptions={{
-              fillColor: "#ec4921",
+              fillColor: "#e3a587",
               fillOpacity: 0.7,
               weight: 2,
               opacity: 1,
-              dashArray: "3",
+              dashArray: "2",
               color: '#252627'
             }}
             positions={coordinates}>
@@ -48,11 +48,11 @@ function App() {
               return (
                 <Polygon
                   pathOptions={{
-                    fillColor: "#32a6b3",
+                    fillColor: "#f2efe9",
                     fillOpacity: 0.7,
                     weight: 2,
                     opacity: 1,
-                    dashArray: "3",
+                    dashArray: "2",
                     color: '#252627'
                   }}
                   positions={coordinates}>
@@ -64,6 +64,30 @@ function App() {
             })
           }
         </FeatureGroup>
+      </LayersControl.Overlay>
+      <LayersControl.Overlay name="Distrito 5">
+      {
+        distrito5.features.map((coord) => {
+          const coordinates = coord.geometry.coordinates.map((item) => [item[1], item[0]]);
+
+          return (
+            <Polygon
+            pathOptions={{
+              fillColor: "#ca2e55",
+              fillOpacity: 0.7,
+              weight: 2,
+              opacity: 1,
+              dashArray: "2",
+              color: '#252627'
+            }}
+            positions={coordinates}>
+              <Popup>
+                Distrito 5
+              </Popup>
+            </Polygon>
+          )
+        })
+      }
       </LayersControl.Overlay>
     </LayersControl>
     </MapContainer>
