@@ -90,17 +90,17 @@ function App() {
       }
       </LayersControl.Overlay>
       <LayersControl.Overlay name="Secciones">
-        <FeatureGroup pathOptions={{ color: '#252627' }}>
+        <FeatureGroup>
           {
             seccionesDistrito5.features.map((coord) => {
               const coordinates = coord.geometry.coordinates.map((item) => [item[1], item[0]]);
 
-              const name = coord.properties.Name;
+              const name = coord.properties.name;
               
               return (
                 <Polygon
                   pathOptions={{
-                    fillColor: "#f2efe9",
+                    fillColor: "#22C55E",
                     fillOpacity: 0.7,
                     weight: 2,
                     opacity: 1,
