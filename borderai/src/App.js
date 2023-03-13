@@ -1,6 +1,6 @@
 import React from "react"
 import { MapContainer, TileLayer, Polygon, Popup, LayersControl, FeatureGroup } from 'react-leaflet'
-import { juarez, colonias, distrito5} from "./data"
+import { juarez, colonias, distrito5, seccionesDistrito5} from "./data"
 import './App.css';
 
 function App() {
@@ -36,7 +36,7 @@ function App() {
       }
       </LayersControl.Overlay>
       <LayersControl.Overlay name="Colonias">
-        <FeatureGroup pathOptions={{ color: '#252627' }}>
+        <FeatureGroup>
           {
             colonias.features.map((coord) => {
               const coordinates = coord.geometry.coordinates[0].map((item) => [item[1], item[0]]);
@@ -88,6 +88,34 @@ function App() {
           )
         })
       }
+      </LayersControl.Overlay>
+      <LayersControl.Overlay name="Secciones">
+        <FeatureGroup pathOptions={{ color: '#252627' }}>
+          {
+            seccionesDistrito5.features.map((coord) => {
+              const coordinates = coord.geometry.coordinates.map((item) => [item[1], item[0]]);
+
+              const name = coord.properties.Name;
+              
+              return (
+                <Polygon
+                  pathOptions={{
+                    fillColor: "#f2efe9",
+                    fillOpacity: 0.7,
+                    weight: 2,
+                    opacity: 1,
+                    dashArray: "2",
+                    color: '#252627'
+                  }}
+                  positions={coordinates}>
+                  <Popup>
+                    {name}
+                  </Popup>
+                </Polygon>
+              )
+            })
+          }
+        </FeatureGroup>
       </LayersControl.Overlay>
     </LayersControl>
     </MapContainer>
