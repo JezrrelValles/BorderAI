@@ -1,15 +1,24 @@
 import React from "react";
 import MapComponent from "./MapComponent";
+import { useState, useEffect } from 'react';
 import { Container, Row, Col, Table, Tabs, Tab } from "react-bootstrap";
-import { juarez, colonias, distrito5, seccionesDistrito5, datos } from "./data";
+import { datos } from "./data";
 import "./App.css";
 
 function App() {
+
+  const [activeTab, setActiveTab] = useState(0);
+
+  useEffect(() => {
+    window.dispatchEvent(new Event('resize'));
+  }, [activeTab]);
+
+
   return (
     <Container fluid>
       <Row>
-        <Tabs defaultActiveKey="demografico" className="mb-3" justify>
-          <Tab eventKey="demografico" title="Demográfico">
+        <Tabs activeKey={activeTab} onSelect={(key) => setActiveTab(key)} className="mb-3" justify>
+          <Tab eventKey={0} title="Demográfico">
             <Row>
               <Col></Col>
               <Col>
@@ -17,7 +26,7 @@ function App() {
               </Col>
             </Row>
           </Tab>
-          <Tab eventKey="politico" title="Político">
+          <Tab eventKey={1} title="Político">
             <Row>
               <Col sm={4}>
                 <h1>Datos</h1>
@@ -85,7 +94,7 @@ function App() {
               </Col>
             </Row>
           </Tab>
-          <Tab eventKey="psicologico" title="Psicológico">
+          <Tab eventKey={2} title="Psicológico">
             <Row>
               <Col></Col>
               <Col>
