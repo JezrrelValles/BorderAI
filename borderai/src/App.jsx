@@ -1,28 +1,132 @@
 import React from "react";
 import MapComponent from "./MapComponent";
-import { useState, useEffect } from 'react';
+import ColumnChart from "./ColumnChart";
+import DataTable from "react-data-table-component";
+import { useState, useEffect } from "react";
 import { Container, Row, Col, Table, Tabs, Tab } from "react-bootstrap";
+import Form from "react-bootstrap/Form";
 import { datos } from "./data";
 import "./App.css";
 
-function App() {
+const columns = [
+  {
+    name: "Departamento",
+    selector: "departamento",
+    sortable: true,
+  },
+  {
+    name: "Clave Municipio",
+    selector: "clave_municipio",
+    sortable: true,
+  },
+  {
+    name: "Municipio",
+    selector: "municipio",
+    sortable: true,
+  },
+  {
+    name: "Sección",
+    selector: "seccion",
+    sortable: true,
+  },
+  {
+    name: "Casilla",
+    selector: "casilla",
+    sortable: true,
+  },
+  {
+    name: "Lista Nominal",
+    selector: "lista_nominal",
+    sortable: true,
+  },
+  {
+    name: "PAN",
+    selector: "pan",
+    sortable: true,
+  },
+  {
+    name: "PRI",
+    selector: "pri",
+    sortable: true,
+  },
+  {
+    name: "PRD",
+    selector: "prd",
+    sortable: true,
+  },
+  {
+    name: "PT",
+    selector: "pt",
+    sortable: true,
+  },
+  {
+    name: "MC",
+    selector: "mc",
+    sortable: true,
+  },
+  {
+    name: "MORENA",
+    selector: "morena",
+    sortable: true,
+  },
+  {
+    name: "CNR",
+    selector: "candidato_no_registrado",
+    sortable: true,
+  },
+  {
+    name: "Votos Nulos",
+    selector: "votos_nulos",
+    sortable: true,
+  },
+  {
+    name: "Votos Totales",
+    selector: "votacion_total",
+    sortable: true,
+  },
+  {
+    name: "% Participación",
+    selector: "porcentaje_participacion",
+    sortable: true,
+  },
+];
 
-  const [activeTab, setActiveTab] = useState(0);
+function App() {
+  const [activeTab, setActiveTab] = useState(2);
+  const [searchText, setSearchText] = useState("");
+
+  const handleSearch = (event) => {
+    setSearchText(event.target.value);
+  };
+
+  const filteredData = searchText
+    ? datos.filter((item) =>
+        Object.keys(item).some((key) =>
+          item[key].toLowerCase().includes(searchText.toLowerCase())
+        )
+      )
+    : datos;
 
   useEffect(() => {
-    window.dispatchEvent(new Event('resize'));
+    window.dispatchEvent(new Event("resize"));
   }, [activeTab]);
-
 
   return (
     <Container fluid>
       <Row>
-        <Tabs activeKey={activeTab} onSelect={(key) => setActiveTab(key)} className="mb-3" justify>
+        <Tabs
+          activeKey={activeTab}
+          onSelect={(key) => setActiveTab(key)}
+          className="mb-3"
+          justify
+        >
           <Tab eventKey={0} title="Demográfico">
             <Row>
-              <Col></Col>
               <Col>
-                <MapComponent/>
+                <ColumnChart />
+              </Col>
+              <Col>
+                <MapComponent />
               </Col>
             </Row>
           </Tab>
@@ -90,15 +194,37 @@ function App() {
                 </Table>
               </Col>
               <Col>
-                <MapComponent/>
+                <MapComponent />
               </Col>
             </Row>
           </Tab>
           <Tab eventKey={2} title="Psicológico">
             <Row>
-              <Col></Col>
+              <Col sm={6}>
+                <Row>
+                  <Col></Col>
+                  <Col></Col>
+                  <Col xs={4}>
+                    <Form.Control
+                      className="mb-2"
+                      size="sm"
+                      type="text"
+                      placeholder="Buscar"
+                      value={searchText}
+                      onChange={handleSearch}
+                    />
+                  </Col>
+                </Row>
+                <DataTable
+                  title="Demo"
+                  columns={columns}
+                  data={filteredData ? filteredData : datos}
+                  pagination={true}
+                  dense={true}
+                />
+              </Col>
               <Col>
-                <MapComponent/>
+                <MapComponent />
               </Col>
             </Row>
           </Tab>
