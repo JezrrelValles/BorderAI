@@ -1,95 +1,14 @@
 import React from "react";
 import MapComponent from "./MapComponent";
 import ColumnChart from "./ColumnChart";
+import PastelChart from "./PieChart";
+import LineaChart from "./LineChart";
 import DataTable from "react-data-table-component";
 import { useState, useEffect } from "react";
 import { Container, Row, Col, Table, Tabs, Tab } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
-import { datos } from "./data";
+import { datos, columns } from "./data";
 import "./App.css";
-
-const columns = [
-  {
-    name: "Departamento",
-    selector: "departamento",
-    sortable: true,
-  },
-  {
-    name: "Clave Municipio",
-    selector: "clave_municipio",
-    sortable: true,
-  },
-  {
-    name: "Municipio",
-    selector: "municipio",
-    sortable: true,
-  },
-  {
-    name: "Sección",
-    selector: "seccion",
-    sortable: true,
-  },
-  {
-    name: "Casilla",
-    selector: "casilla",
-    sortable: true,
-  },
-  {
-    name: "Lista Nominal",
-    selector: "lista_nominal",
-    sortable: true,
-  },
-  {
-    name: "PAN",
-    selector: "pan",
-    sortable: true,
-  },
-  {
-    name: "PRI",
-    selector: "pri",
-    sortable: true,
-  },
-  {
-    name: "PRD",
-    selector: "prd",
-    sortable: true,
-  },
-  {
-    name: "PT",
-    selector: "pt",
-    sortable: true,
-  },
-  {
-    name: "MC",
-    selector: "mc",
-    sortable: true,
-  },
-  {
-    name: "MORENA",
-    selector: "morena",
-    sortable: true,
-  },
-  {
-    name: "CNR",
-    selector: "candidato_no_registrado",
-    sortable: true,
-  },
-  {
-    name: "Votos Nulos",
-    selector: "votos_nulos",
-    sortable: true,
-  },
-  {
-    name: "Votos Totales",
-    selector: "votacion_total",
-    sortable: true,
-  },
-  {
-    name: "% Participación",
-    selector: "porcentaje_participacion",
-    sortable: true,
-  },
-];
 
 function App() {
   const [activeTab, setActiveTab] = useState(2);
@@ -206,7 +125,6 @@ function App() {
                   <Col></Col>
                   <Col xs={4}>
                     <Form.Control
-                      className="mb-2"
                       size="sm"
                       type="text"
                       placeholder="Buscar"
@@ -222,6 +140,9 @@ function App() {
                   pagination={true}
                   dense={true}
                 />
+                <LineaChart />
+                <ColumnChart />
+                <PastelChart />
               </Col>
               <Col>
                 <MapComponent />
