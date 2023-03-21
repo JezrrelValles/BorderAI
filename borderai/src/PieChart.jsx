@@ -1,5 +1,5 @@
 import React from "react";
-import { Pie, Cell, PieChart } from "recharts";
+import { Pie, PieChart } from "recharts";
 
 const data = [
   { name: "A", value: 10 },
@@ -11,23 +11,27 @@ const data = [
 const PastelChart = () => {
   return (
     <div>
-      <PieChart width={400} height={400}>
+      <PieChart width={730} height={250}>
         <Pie
           data={data}
-          cx={200}
-          cy={200}
+          dataKey="value"
+          nameKey="name"
+          cx="50%"
+          cy="50%"
+          outerRadius={50}
+          fill="#8884d8"
+        />
+        <Pie
+          data={data}
+          dataKey="value"
+          nameKey="name"
+          cx="50%"
+          cy="50%"
           innerRadius={60}
           outerRadius={80}
-          fill="#8884d8"
-          dataKey="value"
-        >
-          {data.map((entry, index) => (
-            <Cell
-              key={`cell-${index}`}
-              fill={`#${Math.floor(Math.random() * 16777215).toString(16)}`}
-            />
-          ))}
-        </Pie>
+          fill="#82ca9d"
+          label
+        />
       </PieChart>
     </div>
   );

@@ -1,21 +1,19 @@
 import React from "react";
-import { BarChart, XAxis, YAxis, Tooltip, Bar } from "recharts";
-
-const data = [
-  { name: "A", value: 10 },
-  { name: "B", value: 20 },
-  { name: "C", value: 30 },
-  { name: "D", value: 40 },
-];
+import { BarChart, XAxis, YAxis, Tooltip, Bar, CartesianGrid, Legend } from "recharts";
+import { datos } from "./data"
 
 const ColumnChart = () => {
   return (
     <div>
-      <BarChart width={400} height={300} data={data}>
-        <XAxis dataKey="name" />
+      <BarChart width={730} height={250} data={datos}>
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="seccion" />
         <YAxis />
         <Tooltip />
-        <Bar dataKey="value" fill="#8884d8" />
+        <Legend />
+        <Bar dataKey="pri" fill="#8884d8" />
+        <Bar dataKey="pan" fill="#82ca9d" />
+        <Bar dataKey="morena" fill="#84aa9d" />
       </BarChart>
     </div>
   );

@@ -13,7 +13,7 @@ function MapComponent() {
   return (
     <MapContainer
       center={[31.456364799515877, -106.53501426130038]}
-      zoom={9}
+      zoom={10}
       scrollWheelZoom={false}
     >
       <TileLayer
