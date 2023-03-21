@@ -1,10 +1,14 @@
 import React from "react";
-import MapComponent from "./MapComponent";
-import ColumnChart from "./ColumnChart";
-import PastelChart from "./PieChart";
-import LineaChart from "./LineChart";
-import EmbudoChart from "./FunnelChart";
-import RadChart from "./RadarChart";
+import MapComponent from "./components/MapComponent";
+import ColumnChart from "./components/ColumnChart";
+import PastelChart from "./components/PieChart";
+import LineaChart from "./components/LineChart";
+import EmbudoChart from "./components/FunnelChart";
+import RadChart from "./components/RadarChart";
+import RadialChart from "./components/RadialChart";
+import PuntosChart from "./components/ScatterChart";
+import TreeChart from "./components/TreeMap";
+import AriaChart from "./components/AreaChart";
 import DataTable, { createTheme } from "react-data-table-component";
 import { useState, useEffect } from "react";
 import {
@@ -236,20 +240,12 @@ function App() {
                 <Row className="mt-4">
                   <LineaChart />
                   <RadChart/>
-                </Row>
-                <Row className="mt-4">
-                  <Col xs={2}></Col>
-                  <Col>
-                    <ColumnChart />
-                  </Col>
-                  <Col xs={2}></Col>
-                </Row>
-                <Row>
-                  <Col xs={2}></Col>
-                  <Col>
-                    <PastelChart />
-                  </Col>
-                  <Col xs={2}></Col>
+                  <RadialChart/>
+                  <PuntosChart/>
+                  <ColumnChart />
+                  <PastelChart />
+                  <TreeChart/>
+                  <AriaChart/>
                 </Row>
               </Col>
               <Col>

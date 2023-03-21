@@ -7,7 +7,7 @@ import {
   LayersControl,
   FeatureGroup,
 } from "react-leaflet";
-import { juarez, colonias, distrito5, seccionesDistrito5, datos } from "./data";
+import { juarez, colonias, distrito5, seccionesDistrito5, datos } from "../data";
 
 function MapComponent() {
   return (
