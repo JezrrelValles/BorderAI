@@ -26,7 +26,7 @@ import {
   BsFillCalendarDateFill,
 } from "react-icons/bs";
 import Form from "react-bootstrap/Form";
-import { datos, columns } from "./data";
+import { datos, columns, poblacionTotal, poblacionMale, poblacionFemale } from "./data";
 import "./App.css";
 
 createTheme(
@@ -85,7 +85,11 @@ function App() {
           className="mb-3"
           justify
         >
-          <Tab eventKey={0} title="Demográfico" style={{backgroundColor: "#f8f9fc"}}>
+          <Tab
+            eventKey={0}
+            title="Demográfico"
+            style={{ backgroundColor: "#f8f9fc" }}
+          >
             <Row>
               <Col sm={6}>
                 <CardGroup className="mb-4">
@@ -168,10 +172,10 @@ function App() {
                   <Card>
                     <Card.Body className="text-center">
                       <Card.Title>
-                        Población masculina por rangos de edad
+                        Población male por rangos de edad
                       </Card.Title>
                       <Card.Text>
-                        <EmbudoChart />
+                        <EmbudoChart data={poblacionMale} />
                       </Card.Text>
                     </Card.Body>
                     <Card.Footer>
@@ -184,7 +188,7 @@ function App() {
                         Población total por rangos de edad
                       </Card.Title>
                       <Card.Text>
-                        <EmbudoChart />
+                        <EmbudoChart data={poblacionTotal} />
                       </Card.Text>
                     </Card.Body>
                     <Card.Footer>
@@ -197,7 +201,7 @@ function App() {
                         Población femenina por rangos de edad
                       </Card.Title>
                       <Card.Text>
-                        <EmbudoChart />
+                        <EmbudoChart data={poblacionFemale} />
                       </Card.Text>
                     </Card.Body>
                     <Card.Footer>
@@ -211,7 +215,11 @@ function App() {
               </Col>
             </Row>
           </Tab>
-          <Tab eventKey={1} title="Político" style={{backgroundColor: "#f8f9fc"}}>
+          <Tab
+            eventKey={1}
+            title="Político"
+            style={{ backgroundColor: "#f8f9fc" }}
+          >
             <Row>
               <Col xs={6}>
                 <Row>
@@ -280,42 +288,123 @@ function App() {
           <Tab eventKey={2} title="Psicológico">
             <Row>
               <Col sm={6}>
-                <Row>
-                  <Col></Col>
-                  <Col></Col>
-                  <Col xs={4}>
-                    <Form.Control
-                      size="sm"
-                      type="text"
-                      placeholder="Buscar"
-                      value={searchText}
-                      onChange={handleSearch}
-                    />
-                  </Col>
-                </Row>
-                <DataTable
-                  title="Psicológico"
-                  columns={columns}
-                  data={filteredData ? filteredData : datos}
-                  pagination={true}
-                  dense={true}
-                  theme="solarized"
-                />
-                <LineaChart />
-                <Row className="mt-4">
-                  <Col xs={2}></Col>
-                  <Col>
-                    <ColumnChart />
-                  </Col>
-                  <Col xs={2}></Col>
-                </Row>
-                <Row>
-                  <Col xs={2}></Col>
-                  <Col>
-                    <PastelChart />
-                  </Col>
-                  <Col xs={2}></Col>
-                </Row>
+                <CardGroup className="mb-4">
+                  <Card>
+                    <Card.Body className="text-center">
+                      <Card.Title>
+                        <BsGenderMale color="#3393ff" />
+                      </Card.Title>
+                      <Card.Subtitle>Población masculina</Card.Subtitle>
+                      <Card.Text>756,977</Card.Text>
+                    </Card.Body>
+                    <Card.Footer>
+                      <small className="text-muted">Fuente: INEGI (2020)</small>
+                    </Card.Footer>
+                  </Card>
+                  <Card>
+                    <Card.Body className="text-center">
+                      <Card.Title>
+                        <HiUsers color="#8884d8" />
+                      </Card.Title>
+                      <Card.Subtitle>Población total</Card.Subtitle>
+                      <Card.Text>1,512,450</Card.Text>
+                    </Card.Body>
+                    <Card.Footer>
+                      <small className="text-muted">Fuente: INEGI (2020)</small>
+                    </Card.Footer>
+                  </Card>
+                  <Card>
+                    <Card.Body className="text-center">
+                      <Card.Title>
+                        <BsGenderFemale color="#ca61c3" />
+                      </Card.Title>
+                      <Card.Subtitle>Población femenina</Card.Subtitle>
+                      <Card.Text>755,473</Card.Text>
+                    </Card.Body>
+                    <Card.Footer>
+                      <small className="text-muted">Fuente: INEGI (2020)</small>
+                    </Card.Footer>
+                  </Card>
+                </CardGroup>
+                <CardGroup className="mb-4">
+                  <Card>
+                    <Card.Body className="text-center">
+                      <Card.Title>
+                        <BsGenderMale color="#3393ff" />
+                      </Card.Title>
+                      <Card.Subtitle>Edad mediana masculina</Card.Subtitle>
+                      <Card.Text>28</Card.Text>
+                    </Card.Body>
+                    <Card.Footer>
+                      <small className="text-muted">Fuente: INEGI (2020)</small>
+                    </Card.Footer>
+                  </Card>
+                  <Card>
+                    <Card.Body className="text-center">
+                      <Card.Title>
+                        <BsFillCalendarDateFill color="#8884d8" />
+                      </Card.Title>
+                      <Card.Subtitle>Edad mediana</Card.Subtitle>
+                      <Card.Text>28</Card.Text>
+                    </Card.Body>
+                    <Card.Footer>
+                      <small className="text-muted">Fuente: INEGI (2020)</small>
+                    </Card.Footer>
+                  </Card>
+                  <Card>
+                    <Card.Body className="text-center">
+                      <Card.Title>
+                        <BsGenderFemale color="#ca61c3" />
+                      </Card.Title>
+                      <Card.Subtitle>Edad mediana femenina</Card.Subtitle>
+                      <Card.Text>29</Card.Text>
+                    </Card.Body>
+                    <Card.Footer>
+                      <small className="text-muted">Fuente: INEGI (2020)</small>
+                    </Card.Footer>
+                  </Card>
+                </CardGroup>
+                <CardGroup className="mb-4">
+                  <Card>
+                    <Card.Body className="text-center">
+                      <Card.Title>
+                        Población male por rangos de edad
+                      </Card.Title>
+                      <Card.Text>
+                        <EmbudoChart />
+                      </Card.Text>
+                    </Card.Body>
+                    <Card.Footer>
+                      <small className="text-muted">Fuente: INEGI (2020)</small>
+                    </Card.Footer>
+                  </Card>
+                  <Card>
+                    <Card.Body className="text-center">
+                      <Card.Title>
+                        Población total por rangos de edad
+                      </Card.Title>
+                      <Card.Text>
+                        <EmbudoChart />
+                      </Card.Text>
+                    </Card.Body>
+                    <Card.Footer>
+                      <small className="text-muted">Fuente: INEGI (2020)</small>
+                    </Card.Footer>
+                  </Card>
+                  <Card>
+                    <Card.Body className="text-center">
+                      <Card.Title>
+                        Población femenina por rangos de edad
+                      </Card.Title>
+                      <Card.Text>
+                        <EmbudoChart />
+                      </Card.Text>
+                    </Card.Body>
+                    <Card.Footer>
+                      <small className="text-muted">Fuente: INEGI (2020)</small>
+                    </Card.Footer>
+                  </Card>
+                </CardGroup>
               </Col>
               <Col>
                 <MapComponent />
