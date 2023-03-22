@@ -11,7 +11,7 @@ const data = [
 const PastelChart = () => {
   return (
     <div>
-      <PieChart width={730} height={250}>
+      <PieChart width={600} height={300}>
         <Pie
           data={data}
           dataKey="value"

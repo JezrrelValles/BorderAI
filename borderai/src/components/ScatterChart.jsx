@@ -72,11 +72,11 @@ const PuntosChart = () => {
   return (
     <div>
       <ScatterChart
-        width={730}
-        height={250}
+        width={600}
+        height={300}
         margin={{
-          top: 20,
-          right: 20,
+          top: 10,
+          right: 10,
           bottom: 10,
           left: 10,
         }}

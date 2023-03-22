@@ -5,7 +5,6 @@ import PastelChart from "./components/PieChart";
 import LineaChart from "./components/LineChart";
 import EmbudoChart from "./components/FunnelChart";
 import RadChart from "./components/RadarChart";
-import RadialChart from "./components/RadialChart";
 import PuntosChart from "./components/ScatterChart";
 import TreeChart from "./components/TreeMap";
 import AriaChart from "./components/AreaChart";
@@ -238,14 +237,39 @@ function App() {
                   />
                 </Row>
                 <Row className="mt-4">
-                  <LineaChart />
-                  <RadChart/>
-                  <RadialChart/>
-                  <PuntosChart/>
-                  <ColumnChart />
-                  <PastelChart />
-                  <TreeChart/>
-                  <AriaChart/>
+                  <Col xs={4}>
+                    <LineaChart />
+                  </Col>
+                </Row>
+                <Row className="mt-4">
+                  <Col xs={4}>
+                    <RadChart />
+                  </Col>
+                </Row>
+                <Row className="mt-4">
+                  <Col xs={4}>
+                    <PuntosChart />
+                  </Col>
+                </Row>
+                <Row className="mt-4">
+                  <Col xs={4}>
+                    <ColumnChart />
+                  </Col>
+                </Row>
+                <Row className="mt-4">
+                  <Col xs={4}>
+                    <PastelChart />
+                  </Col>
+                </Row>
+                <Row className="mt-4">
+                  <Col xs={4}>
+                    <TreeChart />
+                  </Col>
+                </Row>
+                <Row className="mt-4">
+                  <Col xs={4}>
+                    <AriaChart />
+                  </Col>
                 </Row>
               </Col>
               <Col>
