@@ -32,6 +32,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -46,3 +47,20 @@
   border-style: groove;
 }
 
+.nav-link.active {
+  color: #f8f9fc !important;
+  background-color: #8884d8 !important;
+}
+
+.nav-link {
+  color: #8884d8 !important;
+}
+
+.form-control {
+  background-color: #f8f9fc !important;
+}
+
+.form-control:focus {
+  border-color: #8884d8 !important;
+  box-shadow: 0 0 0 .25rem rgba(136, 132, 216, .25) !important;
+}

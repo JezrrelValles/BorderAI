@@ -33,8 +33,8 @@ createTheme(
   "solarized",
   {
     text: {
-      primary: "#0078ff",
-      secondary: "#0078ff",
+      primary: "#8884d8",
+      secondary: "#8884d8",
     },
     background: {
       default: "#f8f9fc",
@@ -47,10 +47,10 @@ createTheme(
       default: "#073642",
     },
     button: {
-      default: "rgba(0,120,255,.54)",
-      focus: "rgba(0,120,255,.12)",
-      hover: "rgba(0,120,255,.12)",
-      disabled: "rgba(0,120,255,.18)",
+      default: "rgba(136,132,216,.54)",
+      focus: "rgba(136,132,216,.12)",
+      hover: "rgba(136,132,216,.12)",
+      disabled: "rgba(136,132,216,.18)",
     },
   },
   "dark"
@@ -85,7 +85,7 @@ function App() {
           className="mb-3"
           justify
         >
-          <Tab eventKey={0} title="Demográfico">
+          <Tab eventKey={0} title="Demográfico" style={{backgroundColor: "#f8f9fc"}}>
             <Row>
               <Col sm={6}>
                 <CardGroup className="mb-4">
@@ -104,7 +104,7 @@ function App() {
                   <Card>
                     <Card.Body className="text-center">
                       <Card.Title>
-                        <HiUsers color="#7F7AE1" />
+                        <HiUsers color="#8884d8" />
                       </Card.Title>
                       <Card.Subtitle>Población total</Card.Subtitle>
                       <Card.Text>1,512,450</Card.Text>
@@ -142,7 +142,7 @@ function App() {
                   <Card>
                     <Card.Body className="text-center">
                       <Card.Title>
-                        <BsFillCalendarDateFill color="#7F7AE1" />
+                        <BsFillCalendarDateFill color="#8884d8" />
                       </Card.Title>
                       <Card.Subtitle>Edad mediana</Card.Subtitle>
                       <Card.Text>28</Card.Text>
@@ -211,7 +211,7 @@ function App() {
               </Col>
             </Row>
           </Tab>
-          <Tab eventKey={1} title="Político">
+          <Tab eventKey={1} title="Político" style={{backgroundColor: "#f8f9fc"}}>
             <Row>
               <Col xs={6}>
                 <Row>
