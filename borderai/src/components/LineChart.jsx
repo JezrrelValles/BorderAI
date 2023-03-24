@@ -8,7 +8,7 @@ import {
   Tooltip,
   Legend,
 } from "recharts";
-import { datos } from "../data";
+import { datos, resultados_1683 } from "../data";
 
 const data = [
   {
@@ -61,16 +61,17 @@ const LineaChart = () => {
       <LineChart
         width={600}
         height={300}
-        data={data}
+        data={resultados_1683}
         margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
       >
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" />
+        <XAxis dataKey="casilla" />
         <YAxis />
         <Tooltip />
         <Legend />
-        <Line type="monotone" dataKey="pv" stroke="#8884d8" />
-        <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
+        <Line type="monotone" dataKey="pan" stroke="#06338e" />
+        <Line type="monotone" dataKey="pri" stroke="#00923f" />
+        <Line type="monotone" dataKey="morena" stroke="#ac241c" />
       </LineChart>
     </div>
   );

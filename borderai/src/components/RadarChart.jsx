@@ -7,7 +7,7 @@ import {
   PolarRadiusAxis,
   Legend,
 } from "recharts";
-import { datos } from "../data";
+import { datos, resultados_1683 } from "../data";
 
 const data = [
   {
@@ -51,22 +51,29 @@ const data = [
 const RadChart = () => {
   return (
     <div>
-      <RadarChart outerRadius={90} width={600} height={300} data={data}>
+      <RadarChart outerRadius={90} width={600} height={300} data={resultados_1683}>
         <PolarGrid />
-        <PolarAngleAxis dataKey="subject" />
+        <PolarAngleAxis dataKey="casilla" />
         <PolarRadiusAxis angle={30} domain={[0, 150]} />
         <Radar
-          name="Mike"
-          dataKey="A"
-          stroke="#8884d8"
-          fill="#8884d8"
+          name="PAN"
+          dataKey="pan"
+          stroke="#06338e"
+          fill="#06338e"
           fillOpacity={0.6}
         />
         <Radar
-          name="Lily"
-          dataKey="B"
-          stroke="#82ca9d"
-          fill="#82ca9d"
+          name="PRI"
+          dataKey="pri"
+          stroke="#00923f"
+          fill="#00923f"
+          fillOpacity={0.6}
+        />
+        <Radar
+          name="Morena"
+          dataKey="morena"
+          stroke="#ac241c"
+          fill="#ac241c"
           fillOpacity={0.6}
         />
         <Legend />

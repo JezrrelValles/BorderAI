@@ -7,7 +7,7 @@ import {
   Tooltip,
   Area,
 } from "recharts";
-import { datos } from "../data";
+import { datos, resultados_1683 } from "../data";
 
 const data = [
   {
@@ -60,36 +60,47 @@ const AriaChart = () => {
       <AreaChart
         width={600}
         height={300}
-        data={data}
+        data={resultados_1683}
         margin={{ top: 10, right: 10, left: 10, bottom: 10 }}
       >
         <defs>
-          <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
-            <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
+          <linearGradient id="colorPAN" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="5%" stopColor="#06338e" stopOpacity={0.8} />
+            <stop offset="95%" stopColor="#06338e" stopOpacity={0} />
           </linearGradient>
-          <linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="5%" stopColor="#82ca9d" stopOpacity={0.8} />
-            <stop offset="95%" stopColor="#82ca9d" stopOpacity={0} />
+          <linearGradient id="colorPRI" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="5%" stopColor="#00923f" stopOpacity={0.8} />
+            <stop offset="95%" stopColor="#00923f" stopOpacity={0} />
+          </linearGradient>
+          <linearGradient id="colorMORENA" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="5%" stopColor="#ac241c" stopOpacity={0.8} />
+            <stop offset="95%" stopColor="#ac241c" stopOpacity={0} />
           </linearGradient>
         </defs>
-        <XAxis dataKey="name" />
+        <XAxis dataKey="casilla" />
         <YAxis />
         <CartesianGrid strokeDasharray="3 3" />
         <Tooltip />
         <Area
           type="monotone"
-          dataKey="uv"
-          stroke="#8884d8"
+          dataKey="pan"
+          stroke="#06338e"
           fillOpacity={1}
-          fill="url(#colorUv)"
+          fill="url(#colorPAN)"
         />
         <Area
           type="monotone"
-          dataKey="pv"
-          stroke="#82ca9d"
+          dataKey="pri"
+          stroke="#00923f"
           fillOpacity={1}
-          fill="url(#colorPv)"
+          fill="url(#colorPRI)"
+        />
+        <Area
+          type="monotone"
+          dataKey="morena"
+          stroke="#ac241c"
+          fillOpacity={1}
+          fill="url(#colorMORENA)"
         />
       </AreaChart>
     </div>

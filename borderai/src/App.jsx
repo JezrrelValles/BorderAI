@@ -8,6 +8,7 @@ import RadChart from "./components/RadarChart";
 import PuntosChart from "./components/ScatterChart";
 import TreeChart from "./components/TreeMap";
 import AriaChart from "./components/AreaChart";
+import RadialChart from "./components/RadialChart";
 import DataTable, { createTheme } from "react-data-table-component";
 import { useState, useEffect } from "react";
 import {
@@ -19,15 +20,37 @@ import {
   Card,
   CardGroup,
 } from "react-bootstrap";
-import { HiUsers } from "react-icons/hi";
+import { IoAccessibility } from "react-icons/io5";
+import { MdFamilyRestroom } from "react-icons/md";
+import { FaBrain } from "react-icons/fa";
+import { RiEmotionHappyFill, RiEmotionHappyLine } from "react-icons/ri";
+import { HiUsers, HiUserGroup, HiUser } from "react-icons/hi";
 import {
   BsGenderMale,
   BsGenderFemale,
   BsFillCalendarDateFill,
+  BsFlagFill,
+  BsFillBriefcaseFill,
 } from "react-icons/bs";
 import Form from "react-bootstrap/Form";
-import { datos, columns, poblacionTotal, poblacionMale, poblacionFemale } from "./data";
+import {
+  datos,
+  columns,
+  poblacionTotal,
+  poblacionMale,
+  poblacionFemale,
+  data,
+} from "./data";
 import "./App.css";
+import {
+  Bar,
+  BarChart,
+  CartesianGrid,
+  XAxis,
+  YAxis,
+  Tooltip,
+  Legend,
+} from "recharts";
 
 createTheme(
   "solarized",
@@ -171,9 +194,7 @@ function App() {
                 <CardGroup className="mb-4">
                   <Card>
                     <Card.Body className="text-center">
-                      <Card.Title>
-                        Población male por rangos de edad
-                      </Card.Title>
+                      <Card.Title>Población male por rangos de edad</Card.Title>
                       <Card.Text>
                         <EmbudoChart data={poblacionMale} />
                       </Card.Text>
@@ -236,7 +257,7 @@ function App() {
                 </Row>
                 <Row className="mt-1">
                   <DataTable
-                    title="Político"
+                    title="Resultados electorales locales"
                     columns={columns}
                     data={filteredData ? filteredData : datos}
                     pagination={true}
@@ -254,17 +275,17 @@ function App() {
                     <RadChart />
                   </Col>
                 </Row>
-                <Row className="mt-4">
+                {/* <Row className="mt-4">
                   <Col xs={4}>
                     <PuntosChart />
                   </Col>
-                </Row>
+                </Row> */}
                 <Row className="mt-4">
                   <Col xs={4}>
                     <ColumnChart />
                   </Col>
                 </Row>
-                <Row className="mt-4">
+                {/* <Row className="mt-4">
                   <Col xs={4}>
                     <PastelChart />
                   </Col>
@@ -273,7 +294,7 @@ function App() {
                   <Col xs={4}>
                     <TreeChart />
                   </Col>
-                </Row>
+                </Row> */}
                 <Row className="mt-4">
                   <Col xs={4}>
                     <AriaChart />
@@ -292,13 +313,65 @@ function App() {
                   <Card>
                     <Card.Body className="text-center">
                       <Card.Title>
-                        <BsGenderMale color="#3393ff" />
+                        <RiEmotionHappyFill color="#8884d8" />
                       </Card.Title>
-                      <Card.Subtitle>Población masculina</Card.Subtitle>
-                      <Card.Text>756,977</Card.Text>
+                      <Card.Subtitle>
+                        Nivel de felicidad ciudadana
+                      </Card.Subtitle>
+                      <Card.Text>8.28</Card.Text>
                     </Card.Body>
                     <Card.Footer>
-                      <small className="text-muted">Fuente: INEGI (2020)</small>
+                      <small className="text-muted">
+                        Fuente: Encuesta de Percepción Ciudadada (2021)
+                      </small>
+                    </Card.Footer>
+                  </Card>
+                  <Card>
+                    <Card.Body className="text-center">
+                      <Card.Title>
+                        <BsFlagFill color="#8884d8" />
+                      </Card.Title>
+                      <Card.Subtitle>Nivel de orgullo ciudadano</Card.Subtitle>
+                      <Card.Text>4.33</Card.Text>
+                    </Card.Body>
+                    <Card.Footer>
+                      <small className="text-muted">
+                        Fuente: Encuesta de Percepción Ciudadada (2021)
+                      </small>
+                    </Card.Footer>
+                  </Card>
+                  <Card>
+                    <Card.Body className="text-center">
+                      <Card.Title>
+                        <RiEmotionHappyFill color="#8884d8" />
+                      </Card.Title>
+                      <Card.Subtitle>
+                        Nivel de satisfacción ciudadana
+                      </Card.Subtitle>
+                      <Card.Text>6.82</Card.Text>
+                    </Card.Body>
+                    <Card.Footer>
+                      <small className="text-muted">
+                        Fuente: Encuesta de Percepción Ciudadada (2021)
+                      </small>
+                    </Card.Footer>
+                  </Card>
+                </CardGroup>
+                <CardGroup className="mb-4">
+                  <Card>
+                    <Card.Body className="text-center">
+                      <Card.Title>
+                        <MdFamilyRestroom color="#8884d8" />
+                      </Card.Title>
+                      <Card.Subtitle>
+                        Nivel de satisfaccion familiar
+                      </Card.Subtitle>
+                      <Card.Text>8.78</Card.Text>
+                    </Card.Body>
+                    <Card.Footer>
+                      <small className="text-muted">
+                        Fuente: Encuesta de Percepción Ciudadada (2021)
+                      </small>
                     </Card.Footer>
                   </Card>
                   <Card>
@@ -306,23 +379,31 @@ function App() {
                       <Card.Title>
                         <HiUsers color="#8884d8" />
                       </Card.Title>
-                      <Card.Subtitle>Población total</Card.Subtitle>
-                      <Card.Text>1,512,450</Card.Text>
+                      <Card.Subtitle>
+                        Nivel de satisfacción social
+                      </Card.Subtitle>
+                      <Card.Text>7.65</Card.Text>
                     </Card.Body>
                     <Card.Footer>
-                      <small className="text-muted">Fuente: INEGI (2020)</small>
+                      <small className="text-muted">
+                        Fuente: Encuesta de Percepción Ciudadada (2021)
+                      </small>
                     </Card.Footer>
                   </Card>
                   <Card>
                     <Card.Body className="text-center">
                       <Card.Title>
-                        <BsGenderFemale color="#ca61c3" />
+                        <BsFillBriefcaseFill color="#8884d8" />
                       </Card.Title>
-                      <Card.Subtitle>Población femenina</Card.Subtitle>
-                      <Card.Text>755,473</Card.Text>
+                      <Card.Subtitle>
+                        Nivel de satisfacción laboral
+                      </Card.Subtitle>
+                      <Card.Text>8.41</Card.Text>
                     </Card.Body>
                     <Card.Footer>
-                      <small className="text-muted">Fuente: INEGI (2020)</small>
+                      <small className="text-muted">
+                        Fuente: Encuesta de Percepción Ciudadada (2021)
+                      </small>
                     </Card.Footer>
                   </Card>
                 </CardGroup>
@@ -330,81 +411,58 @@ function App() {
                   <Card>
                     <Card.Body className="text-center">
                       <Card.Title>
-                        <BsGenderMale color="#3393ff" />
+                        <IoAccessibility color="#8884d8" />
                       </Card.Title>
-                      <Card.Subtitle>Edad mediana masculina</Card.Subtitle>
-                      <Card.Text>28</Card.Text>
+                      <Card.Subtitle>Nivel de salud física</Card.Subtitle>
+                      <Card.Text>8.09</Card.Text>
                     </Card.Body>
                     <Card.Footer>
-                      <small className="text-muted">Fuente: INEGI (2020)</small>
+                      <small className="text-muted">
+                        Fuente: Encuesta de Percepción Ciudadada (2021)
+                      </small>
                     </Card.Footer>
                   </Card>
                   <Card>
                     <Card.Body className="text-center">
                       <Card.Title>
-                        <BsFillCalendarDateFill color="#8884d8" />
+                        <FaBrain color="#8884d8" />
                       </Card.Title>
-                      <Card.Subtitle>Edad mediana</Card.Subtitle>
-                      <Card.Text>28</Card.Text>
+                      <Card.Subtitle>Nivel de salud mental</Card.Subtitle>
+                      <Card.Text>8.48</Card.Text>
                     </Card.Body>
                     <Card.Footer>
-                      <small className="text-muted">Fuente: INEGI (2020)</small>
+                      <small className="text-muted">
+                        Fuente: Encuesta de Percepción Ciudadada (2021)
+                      </small>
                     </Card.Footer>
                   </Card>
                   <Card>
                     <Card.Body className="text-center">
                       <Card.Title>
-                        <BsGenderFemale color="#ca61c3" />
+                        <HiUser color="#8884d8" />
                       </Card.Title>
-                      <Card.Subtitle>Edad mediana femenina</Card.Subtitle>
-                      <Card.Text>29</Card.Text>
+                      <Card.Subtitle>Nivel de apariencia</Card.Subtitle>
+                      <Card.Text>8.28</Card.Text>
                     </Card.Body>
                     <Card.Footer>
-                      <small className="text-muted">Fuente: INEGI (2020)</small>
+                      <small className="text-muted">
+                        Fuente: Encuesta de Percepción Ciudadada (2021)
+                      </small>
                     </Card.Footer>
                   </Card>
                 </CardGroup>
-                <CardGroup className="mb-4">
-                  <Card>
-                    <Card.Body className="text-center">
-                      <Card.Title>
-                        Población male por rangos de edad
-                      </Card.Title>
-                      <Card.Text>
-                        <EmbudoChart />
-                      </Card.Text>
-                    </Card.Body>
-                    <Card.Footer>
-                      <small className="text-muted">Fuente: INEGI (2020)</small>
-                    </Card.Footer>
-                  </Card>
-                  <Card>
-                    <Card.Body className="text-center">
-                      <Card.Title>
-                        Población total por rangos de edad
-                      </Card.Title>
-                      <Card.Text>
-                        <EmbudoChart />
-                      </Card.Text>
-                    </Card.Body>
-                    <Card.Footer>
-                      <small className="text-muted">Fuente: INEGI (2020)</small>
-                    </Card.Footer>
-                  </Card>
-                  <Card>
-                    <Card.Body className="text-center">
-                      <Card.Title>
-                        Población femenina por rangos de edad
-                      </Card.Title>
-                      <Card.Text>
-                        <EmbudoChart />
-                      </Card.Text>
-                    </Card.Body>
-                    <Card.Footer>
-                      <small className="text-muted">Fuente: INEGI (2020)</small>
-                    </Card.Footer>
-                  </Card>
-                </CardGroup>
+                <Row className="mt-4">
+                  <Col xs={4}>
+                    <BarChart width={600} height={300} data={data}>
+                      <CartesianGrid strokeDasharray="3 3" />
+                      <XAxis dataKey="name" />
+                      <YAxis />
+                      <Tooltip />
+                      <Legend />
+                      <Bar dataKey="value" fill="#8884d8" />
+                    </BarChart>
+                  </Col>
+                </Row>
               </Col>
               <Col>
                 <MapComponent />

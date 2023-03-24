@@ -7,7 +7,14 @@ import {
   LayersControl,
   FeatureGroup,
 } from "react-leaflet";
-import { juarez, colonias, distrito5, seccionesDistrito5, datos } from "../data";
+import {
+  juarez,
+  colonias,
+  distrito5,
+  seccionesDistrito5,
+  datos,
+  distritosElectoralesLocales,
+} from "../data";
 
 function MapComponent() {
   return (
@@ -21,14 +28,14 @@ function MapComponent() {
         url="https:{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       <LayersControl position="topright">
-        <LayersControl.Overlay checked name="Juárez">
+        <LayersControl.Overlay checked name="Ciudad Juárez">
           {juarez.features.map((coord) => {
             const coordinates = coord.geometry.coordinates[0];
 
             return (
               <Polygon
                 pathOptions={{
-                  fillColor: "#e3a587",
+                  fillColor: "#DA5F69",
                   fillOpacity: 0.7,
                   weight: 2,
                   opacity: 1,
@@ -42,22 +49,20 @@ function MapComponent() {
             );
           })}
         </LayersControl.Overlay>
-        <LayersControl.Overlay name="Colonias">
+        <LayersControl.Overlay name="Distritos Electorales Locales">
           <FeatureGroup>
-            {colonias.features.map((coord) => {
-              const coordinates = coord.geometry.coordinates[0].map((item) => [
+            {distritosElectoralesLocales.features.map((coord) => {
+              const coordinates = coord.geometry.coordinates.map((item) => [
                 item[1],
                 item[0],
               ]);
 
               const name = coord.properties.name;
 
-              const type = coord.properties.TIPO;
-
               return (
                 <Polygon
                   pathOptions={{
-                    fillColor: "#f2efe9",
+                    fillColor: "#F29545",
                     fillOpacity: 0.7,
                     weight: 2,
                     opacity: 1,
@@ -66,9 +71,7 @@ function MapComponent() {
                   }}
                   positions={coordinates}
                 >
-                  <Popup>
-                    {type}, {name}
-                  </Popup>
+                  <Popup>{name}</Popup>
                 </Polygon>
               );
             })}
@@ -84,7 +87,7 @@ function MapComponent() {
             return (
               <Polygon
                 pathOptions={{
-                  fillColor: "#ca2e55",
+                  fillColor: "#F1C43B",
                   fillOpacity: 0.7,
                   weight: 2,
                   opacity: 1,
@@ -128,7 +131,7 @@ function MapComponent() {
               return (
                 <Polygon
                   pathOptions={{
-                    fillColor: "#00cccc",
+                    fillColor: "#A6C04B",
                     fillOpacity:
                       votacionTotal >= 453
                         ? 1
@@ -175,6 +178,38 @@ function MapComponent() {
                         Participación: {participacion ?? "N/A"}
                       </h5>
                     </div>
+                  </Popup>
+                </Polygon>
+              );
+            })}
+          </FeatureGroup>
+        </LayersControl.Overlay>
+        <LayersControl.Overlay name="Colonias">
+          <FeatureGroup>
+            {colonias.features.map((coord) => {
+              const coordinates = coord.geometry.coordinates[0].map((item) => [
+                item[1],
+                item[0],
+              ]);
+
+              const name = coord.properties.name;
+
+              const type = coord.properties.TIPO;
+
+              return (
+                <Polygon
+                  pathOptions={{
+                    fillColor: "#00AA7E",
+                    fillOpacity: 0.7,
+                    weight: 2,
+                    opacity: 1,
+                    dashArray: "2",
+                    color: "#252627",
+                  }}
+                  positions={coordinates}
+                >
+                  <Popup>
+                    {type}, {name}
                   </Popup>
                 </Polygon>
               );
