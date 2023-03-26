@@ -1,3 +1,1 @@
-# BorderAI
-
-## ASDASD
+# BorderAI 2023
