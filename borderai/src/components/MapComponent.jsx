@@ -17,6 +17,7 @@ import {
   indiceSecciones,
   datosVotos,
 } from "../data";
+import "leaflet/dist/leaflet";
 
 const MapComponent = (props) => {
   const { category } = props;
@@ -27,8 +28,8 @@ const MapComponent = (props) => {
       scrollWheelZoom={false}
     >
       <TileLayer
-        attribution='&copy; <a href="https:www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        url="https:{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       />
       <LayersControl position="topright">
         <LayersControl.Overlay checked name="Ciudad Juárez">
@@ -61,8 +62,6 @@ const MapComponent = (props) => {
               ]);
 
               const name = coord.properties.name;
-
-              
 
               return (
                 <Polygon
@@ -117,10 +116,15 @@ const MapComponent = (props) => {
               const name = coord.properties.name;
 
               if (category === "demografico") {
-
-                const poblacion = indiceSecciones.find((item) => item.seccion === name)?.poblacion;
-                const poblacionFemenina = indiceSecciones.find((item) => item.seccion === name)?.poblacionFemenina;
-                const poblacionMasculina = indiceSecciones.find((item) => item.seccion === name)?.poblacionMasculina;
+                const poblacion = indiceSecciones.find(
+                  (item) => item.seccion === name
+                )?.poblacion;
+                const poblacionFemenina = indiceSecciones.find(
+                  (item) => item.seccion === name
+                )?.poblacionFemenina;
+                const poblacionMasculina = indiceSecciones.find(
+                  (item) => item.seccion === name
+                )?.poblacionMasculina;
 
                 return (
                   <Polygon
@@ -169,8 +173,12 @@ const MapComponent = (props) => {
                   </Polygon>
                 );
               } else if (category === "politico") {
-                const pan = datosVotos.find((item) => item.seccion === name)?.pan;
-                const pri = datosVotos.find((item) => item.seccion === name)?.pri;
+                const pan = datosVotos.find(
+                  (item) => item.seccion === name
+                )?.pan;
+                const pri = datosVotos.find(
+                  (item) => item.seccion === name
+                )?.pri;
                 const morena = datosVotos.find(
                   (item) => item.seccion === name
                 )?.morena;
@@ -249,8 +257,7 @@ const MapComponent = (props) => {
                       color: "#252627",
                     }}
                     positions={coordinates}
-                  >
-                  </Polygon>
+                  ></Polygon>
                 );
               }
             })}
