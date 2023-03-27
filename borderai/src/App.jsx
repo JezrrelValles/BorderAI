@@ -39,7 +39,8 @@ import {
   poblacionTotal,
   poblacionMale,
   poblacionFemale,
-  data,
+  indiceProblemas,
+  indiceSecciones
 } from "./data";
 import "./App.css";
 import {
@@ -106,6 +107,7 @@ function App() {
           activeKey={activeTab}
           onSelect={(key) => setActiveTab(key)}
           className="mb-3"
+          style={{ position: 'sticky', top: 0, zIndex: 1 }}
           justify
         >
           <Tab
@@ -115,7 +117,14 @@ function App() {
           >
             <Row>
               <Col sm={6}>
-              <h5 style={{ color: '#8884d8', marginLeft: '270px', marginBottom: '20px' }}>Indicadores</h5>
+                <h5
+                  style={{
+                    color: "#8884d8",
+                  }}
+                  className="text-center"
+                >
+                  Indicadores demograficos y sociedad
+                </h5>
                 <CardGroup className="mb-4">
                   <Card>
                     <Card.Body className="text-center">
@@ -231,9 +240,21 @@ function App() {
                     </Card.Footer>
                   </Card>
                 </CardGroup>
+                <Row>
+                  <Col>
+                  <BarChart width={600} height={300} data={indiceSecciones}>
+                      <CartesianGrid strokeDasharray="3 3" />
+                      <XAxis dataKey="seccion" />
+                      <YAxis />
+                      <Tooltip />
+                      <Legend />
+                      <Bar dataKey="poblacion" fill="#8884d8" />
+                    </BarChart>
+                  </Col>
+                </Row>
               </Col>
               <Col>
-                <MapComponent />
+                <MapComponent category={"demografico"} />
               </Col>
             </Row>
           </Tab>
@@ -303,14 +324,21 @@ function App() {
                 </Row>
               </Col>
               <Col>
-                <MapComponent />
+                <MapComponent category={"politico"} />
               </Col>
             </Row>
           </Tab>
           <Tab eventKey={2} title="Psicológico">
             <Row>
               <Col sm={6}>
-              <h5 style={{ color: '#8884d8', marginLeft: '205px', marginBottom: '20px' }}>Indicadores de Desempeño</h5>
+                <h5
+                  style={{
+                    color: "#8884d8",
+                  }}
+                  className="text-center"
+                >
+                  Indicadores de Desempeño
+                </h5>
                 <CardGroup className="mb-4">
                   <Card>
                     <Card.Body className="text-center">
@@ -320,7 +348,7 @@ function App() {
                       <Card.Subtitle>
                         Nivel de felicidad ciudadana
                       </Card.Subtitle>
-                      <Card.Text style={{ color: '#009688' }}>8.28</Card.Text>
+                      <Card.Text style={{ color: "#009688" }}>8.28</Card.Text>
                     </Card.Body>
                     <Card.Footer>
                       <small className="text-muted">
@@ -334,7 +362,7 @@ function App() {
                         <BsFlagFill color="#8884d8" />
                       </Card.Title>
                       <Card.Subtitle>Nivel de orgullo ciudadano</Card.Subtitle>
-                      <Card.Text style={{ color: '#ec407a' }}>4.33</Card.Text>
+                      <Card.Text style={{ color: "#ec407a" }}>4.33</Card.Text>
                     </Card.Body>
                     <Card.Footer>
                       <small className="text-muted">
@@ -350,7 +378,7 @@ function App() {
                       <Card.Subtitle>
                         Nivel de satisfacción ciudadana
                       </Card.Subtitle>
-                      <Card.Text style={{ color: '#009688' }}>6.82</Card.Text>
+                      <Card.Text style={{ color: "#009688" }}>6.82</Card.Text>
                     </Card.Body>
                     <Card.Footer>
                       <small className="text-muted">
@@ -368,7 +396,7 @@ function App() {
                       <Card.Subtitle>
                         Nivel de satisfaccion familiar
                       </Card.Subtitle>
-                      <Card.Text style={{ color: '#009688' }}>8.78</Card.Text>
+                      <Card.Text style={{ color: "#009688" }}>8.78</Card.Text>
                     </Card.Body>
                     <Card.Footer>
                       <small className="text-muted">
@@ -384,7 +412,7 @@ function App() {
                       <Card.Subtitle>
                         Nivel de satisfacción social
                       </Card.Subtitle>
-                      <Card.Text style={{ color: '#009688' }}>7.65</Card.Text>
+                      <Card.Text style={{ color: "#009688" }}>7.65</Card.Text>
                     </Card.Body>
                     <Card.Footer>
                       <small className="text-muted">
@@ -400,7 +428,7 @@ function App() {
                       <Card.Subtitle>
                         Nivel de satisfacción laboral
                       </Card.Subtitle>
-                      <Card.Text style={{ color: '#009688' }}>8.41</Card.Text>
+                      <Card.Text style={{ color: "#009688" }}>8.41</Card.Text>
                     </Card.Body>
                     <Card.Footer>
                       <small className="text-muted">
@@ -415,8 +443,10 @@ function App() {
                       <Card.Title>
                         <IoAccessibility color="#8884d8" />
                       </Card.Title>
-                      <Card.Subtitle>Nivel de satisfacción salud física</Card.Subtitle>
-                      <Card.Text style={{ color: '#009688' }}>8.09</Card.Text>
+                      <Card.Subtitle>
+                        Nivel de satisfacción salud física
+                      </Card.Subtitle>
+                      <Card.Text style={{ color: "#009688" }}>8.09</Card.Text>
                     </Card.Body>
                     <Card.Footer>
                       <small className="text-muted">
@@ -429,8 +459,10 @@ function App() {
                       <Card.Title>
                         <FaBrain color="#8884d8" />
                       </Card.Title>
-                      <Card.Subtitle>Nivel de satisfacción salud mental</Card.Subtitle>
-                      <Card.Text style={{ color: '#009688' }}>8.48</Card.Text>
+                      <Card.Subtitle>
+                        Nivel de satisfacción salud mental
+                      </Card.Subtitle>
+                      <Card.Text style={{ color: "#009688" }}>8.48</Card.Text>
                     </Card.Body>
                     <Card.Footer>
                       <small className="text-muted">
@@ -443,8 +475,10 @@ function App() {
                       <Card.Title>
                         <HiUser color="#8884d8" />
                       </Card.Title>
-                      <Card.Subtitle>Nivel de satisfacción apariencia</Card.Subtitle>
-                      <Card.Text style={{ color: '#009688' }}>8.28</Card.Text>
+                      <Card.Subtitle>
+                        Nivel de satisfacción apariencia
+                      </Card.Subtitle>
+                      <Card.Text style={{ color: "#009688" }}>8.28</Card.Text>
                     </Card.Body>
                     <Card.Footer>
                       <small className="text-muted">
@@ -454,9 +488,11 @@ function App() {
                   </Card>
                 </CardGroup>
                 <Row className="mt-4">
-                <h5 style={{ color: '#8884d8', marginLeft: '150px' }}>Principales problemas en Ciudad Juárez</h5>
+                  <h5 style={{ color: "#8884d8" }} className="text-center">
+                    Principales problemas en Ciudad Juárez
+                  </h5>
                   <Col xs={4}>
-                    <BarChart width={600} height={300} data={data}>
+                    <BarChart width={600} height={300} data={indiceProblemas}>
                       <CartesianGrid strokeDasharray="3 3" />
                       <XAxis dataKey="name" />
                       <YAxis />
@@ -468,7 +504,7 @@ function App() {
                 </Row>
               </Col>
               <Col>
-                <MapComponent />
+                <MapComponent category={"psicologico"} />
               </Col>
             </Row>
           </Tab>
