@@ -1,12 +1,20 @@
 import React from "react";
-import { Funnel, FunnelChart, LabelList, Tooltip } from "recharts";
+import {
+  Funnel,
+  FunnelChart,
+  LabelList,
+  ResponsiveContainer,
+  Tooltip,
+} from "recharts";
 
 const EmbudoChart = (props) => {
   const { data } = props;
 
   return (
-    <div>
-      <FunnelChart width={208} height={300} margin={{ top: 5, right: 10, bottom: 5, left: 10 }}>
+    <ResponsiveContainer width="100%" height={300}>
+      <FunnelChart
+        margin={{ top: 5, right: 10, bottom: 5, left: 10 }}
+      >
         <Tooltip />
         <Funnel dataKey="value" data={data}>
           <LabelList
@@ -17,7 +25,7 @@ const EmbudoChart = (props) => {
           />
         </Funnel>
       </FunnelChart>
-    </div>
+    </ResponsiveContainer>
   );
 };
 

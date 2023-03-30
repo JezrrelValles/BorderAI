@@ -23,8 +23,8 @@ import {
 import { IoAccessibility } from "react-icons/io5";
 import { MdFamilyRestroom } from "react-icons/md";
 import { FaBrain } from "react-icons/fa";
-import { RiEmotionHappyFill, RiEmotionHappyLine } from "react-icons/ri";
-import { HiUsers, HiUserGroup, HiUser } from "react-icons/hi";
+import { RiEmotionHappyFill } from "react-icons/ri";
+import { HiUsers, HiUser } from "react-icons/hi";
 import {
   BsGenderMale,
   BsGenderFemale,
@@ -40,7 +40,7 @@ import {
   poblacionMale,
   poblacionFemale,
   indiceProblemas,
-  indiceSecciones
+  indiceSecciones,
 } from "./data";
 import "./App.css";
 import {
@@ -106,8 +106,7 @@ function App() {
         <Tabs
           activeKey={activeTab}
           onSelect={(key) => setActiveTab(key)}
-          className="mb-3"
-          style={{ position: 'sticky', top: 0, zIndex: 1 }}
+          style={{ position: "sticky", top: 0, zIndex: 1 }}
           justify
         >
           <Tab
@@ -242,7 +241,15 @@ function App() {
                 </CardGroup>
                 <Row>
                   <Col>
-                  <BarChart width={600} height={300} data={indiceSecciones}>
+                    <h5
+                      style={{
+                        color: "#8884d8",
+                      }}
+                      className="text-center"
+                    >
+                      Indicadores demograficos y sociedad
+                    </h5>
+                    <BarChart width={600} height={300} data={indiceSecciones}>
                       <CartesianGrid strokeDasharray="3 3" />
                       <XAxis dataKey="seccion" />
                       <YAxis />
@@ -264,10 +271,21 @@ function App() {
             style={{ backgroundColor: "#f8f9fc" }}
           >
             <Row>
-              <Col xs={6}>
-                <Row>
-                  <Col></Col>
-                  <Col xs={3}>
+              <Col
+                xs={12}
+                md={6}
+                style={{
+                  width: "100%",
+                  height: "50vh",
+                  position: "relative",
+                  zIndex: 2,
+                }}
+              >
+                <MapComponent category={"politico"} />
+              </Col>
+              <Col>
+                <Row className="justify-content-end">
+                  <Col xs={6} md={2} className="mt-4 mb-2">
                     <Form.Control
                       size="sm"
                       type="text"
@@ -277,54 +295,96 @@ function App() {
                     />
                   </Col>
                 </Row>
-                <Row className="mt-1">
-                  <DataTable
-                    title="Resultados electorales locales"
-                    columns={columns}
-                    data={filteredData ? filteredData : datos}
-                    pagination={true}
-                    dense={true}
-                    theme="solarized"
-                  />
+                <Row>
+                  <Col>
+                    <DataTable
+                      title="Resultados electorales locales"
+                      columns={columns}
+                      data={filteredData ? filteredData : datos}
+                      pagination={true}
+                      dense={true}
+                      theme="solarized"
+                    />
+                  </Col>
                 </Row>
                 <Row className="mt-4">
-                  <Col xs={4}>
+                  <h5
+                    style={{
+                      color: "#8884d8",
+                    }}
+                    className="text-center"
+                  >
+                    Gráfica de lineas
+                  </h5>
+                  <Col>
                     <LineaChart />
                   </Col>
                 </Row>
                 <Row className="mt-4">
-                  <Col xs={4}>
+                  <h5
+                    style={{
+                      color: "#8884d8",
+                    }}
+                    className="text-center"
+                  >
+                    Gráfica de radar
+                  </h5>
+                  <Col>
                     <RadChart />
                   </Col>
                 </Row>
-                {/* <Row className="mt-4">
-                  <Col xs={4}>
-                    <PuntosChart />
-                  </Col>
-                </Row> */}
                 <Row className="mt-4">
-                  <Col xs={4}>
+                  <h5
+                    style={{
+                      color: "#8884d8",
+                    }}
+                    className="text-center"
+                  >
+                    Gráfica de barras
+                  </h5>
+                  <Col>
                     <ColumnChart />
                   </Col>
                 </Row>
-                {/* <Row className="mt-4">
-                  <Col xs={4}>
+                <Row className="mt-4">
+                  <h5
+                    style={{
+                      color: "#8884d8",
+                    }}
+                    className="text-center"
+                  >
+                    Gráfica de área
+                  </h5>
+                  <Col>
+                    <AriaChart />
+                  </Col>
+                </Row>
+                <Row className="mt-4">
+                  <h5
+                    style={{
+                      color: "#8884d8",
+                    }}
+                    className="text-center"
+                  >
+                    Gráfica de pastel
+                  </h5>
+                  <Col>
                     <PastelChart />
                   </Col>
                 </Row>
                 <Row className="mt-4">
-                  <Col xs={4}>
-                    <TreeChart />
-                  </Col>
-                </Row> */}
-                <Row className="mt-4">
-                  <Col xs={4}>
-                    <AriaChart />
+                  <h5
+                    style={{
+                      color: "#8884d8",
+                    }}
+                    className="text-center"
+                  >
+                    Gráfica de puntos
+                  </h5>
+                  <Col>
+                    <PuntosChart />
                   </Col>
                 </Row>
-              </Col>
-              <Col>
-                <MapComponent category={"politico"} />
               </Col>
             </Row>
           </Tab>

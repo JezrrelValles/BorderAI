@@ -1,5 +1,5 @@
 import React from "react";
-import { ScatterChart, CartesianGrid, XAxis, YAxis, ZAxis, Scatter, Tooltip, Legend } from "recharts";
+import { ScatterChart, CartesianGrid, XAxis, YAxis, ZAxis, Scatter, Tooltip, Legend, ResponsiveContainer } from "recharts";
 import { datos, resultados_1683 } from "../data";
 
 const data01 = [
@@ -68,36 +68,27 @@ const data01 = [
     }
   ];
 
-const PuntosChart = () => {
-  return (
-    <div>
-      <ScatterChart
-        width={600}
-        height={300}
-        margin={{
-          top: 10,
-          right: 10,
-          bottom: 10,
-          left: 10,
-        }}
-      >
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="x" type="number" name="stature" unit="cm" />
-        <YAxis dataKey="y" type="number" name="weight" unit="kg" />
-        <ZAxis
-          dataKey="z"
-          type="number"
-          range={[64, 144]}
-          name="score"
-          unit="km"
-        />
-        <Tooltip cursor={{ strokeDasharray: "3 3" }} />
-        <Legend />
-        <Scatter name="A school" data={data01} fill="#8884d8" />
-        <Scatter name="B school" data={data02} fill="#82ca9d" />
-      </ScatterChart>
-    </div>
-  );
-};
+  const PuntosChart = () => {
+    return (
+      <ResponsiveContainer width="100%" height={300}>
+        <ScatterChart>
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="x" type="number" name="stature" unit="cm" />
+          <YAxis dataKey="y" type="number" name="weight" unit="kg" />
+          <ZAxis
+            dataKey="z"
+            type="number"
+            range={[64, 144]}
+            name="score"
+            unit="km"
+          />
+          <Tooltip cursor={{ strokeDasharray: "3 3" }} />
+          <Legend />
+          <Scatter name="A school" data={data01} fill="#8884d8" />
+          <Scatter name="B school" data={data02} fill="#82ca9d" />
+        </ScatterChart>
+      </ResponsiveContainer>
+    );
+  };
 
 export default PuntosChart;
