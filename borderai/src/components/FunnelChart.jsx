@@ -13,10 +13,9 @@ const EmbudoChart = (props) => {
   return (
     <ResponsiveContainer width="100%" height={300}>
       <FunnelChart
-        margin={{ top: 5, right: 10, bottom: 5, left: 10 }}
       >
         <Tooltip />
-        <Funnel dataKey="value" data={data}>
+        <Funnel dataKey="value" data={data} isAnimationActive={false}>
           <LabelList
             position="right"
             fill="#000"

@@ -51,6 +51,7 @@ import {
   YAxis,
   Tooltip,
   Legend,
+  ResponsiveContainer,
 } from "recharts";
 
 createTheme(
@@ -115,7 +116,26 @@ function App() {
             style={{ backgroundColor: "#f8f9fc" }}
           >
             <Row>
-              <Col sm={6}>
+              <Col
+                xs={12}
+                md={6}
+                style={{
+                  width: "100%",
+                  height: "50vh",
+                  position: "relative",
+                  zIndex: 2,
+                }}
+              >
+                <MapComponent category={"politico"} />
+              </Col>
+              <Col
+                xs={12}
+                md={6}
+                style={{
+                  width: "100%",
+                  height: "50vh",
+                }}
+              >
                 <h5
                   style={{
                     color: "#8884d8",
@@ -200,45 +220,6 @@ function App() {
                     </Card.Footer>
                   </Card>
                 </CardGroup>
-                <CardGroup className="mb-4">
-                  <Card>
-                    <Card.Body className="text-center">
-                      <Card.Title>Población male por rangos de edad</Card.Title>
-                      <Card.Text>
-                        <EmbudoChart data={poblacionMale} />
-                      </Card.Text>
-                    </Card.Body>
-                    <Card.Footer>
-                      <small className="text-muted">Fuente: INEGI (2020)</small>
-                    </Card.Footer>
-                  </Card>
-                  <Card>
-                    <Card.Body className="text-center">
-                      <Card.Title>
-                        Población total por rangos de edad
-                      </Card.Title>
-                      <Card.Text>
-                        <EmbudoChart data={poblacionTotal} />
-                      </Card.Text>
-                    </Card.Body>
-                    <Card.Footer>
-                      <small className="text-muted">Fuente: INEGI (2020)</small>
-                    </Card.Footer>
-                  </Card>
-                  <Card>
-                    <Card.Body className="text-center">
-                      <Card.Title>
-                        Población femenina por rangos de edad
-                      </Card.Title>
-                      <Card.Text>
-                        <EmbudoChart data={poblacionFemale} />
-                      </Card.Text>
-                    </Card.Body>
-                    <Card.Footer>
-                      <small className="text-muted">Fuente: INEGI (2020)</small>
-                    </Card.Footer>
-                  </Card>
-                </CardGroup>
                 <Row>
                   <Col>
                     <h5
@@ -249,19 +230,31 @@ function App() {
                     >
                       Indicadores demograficos y sociedad
                     </h5>
-                    <BarChart width={600} height={300} data={indiceSecciones}>
-                      <CartesianGrid strokeDasharray="3 3" />
-                      <XAxis dataKey="seccion" />
-                      <YAxis />
-                      <Tooltip />
-                      <Legend />
-                      <Bar dataKey="poblacion" fill="#8884d8" />
-                    </BarChart>
+                    <ResponsiveContainer width="100%" height={300}>
+                      <BarChart data={indiceSecciones}>
+                        <CartesianGrid strokeDasharray="3 3" />
+                        <XAxis dataKey="seccion" />
+                        <YAxis />
+                        <Tooltip />
+                        <Legend />
+                        <Bar dataKey="poblacion" fill="#8884d8" />
+                      </BarChart>
+                    </ResponsiveContainer>
                   </Col>
                 </Row>
-              </Col>
-              <Col>
-                <MapComponent category={"demografico"} />
+                <Row>
+                  <Col>
+                    <EmbudoChart data={poblacionMale} />
+                  </Col>
+                </Row>
+                <Row>
+                  <Col>
+                    <EmbudoChart data={poblacionTotal} />
+                  </Col>
+                  <Col>
+                    <EmbudoChart data={poblacionFemale} />
+                  </Col>
+                </Row>
               </Col>
             </Row>
           </Tab>
@@ -388,7 +381,11 @@ function App() {
               </Col>
             </Row>
           </Tab>
-          <Tab eventKey={2} title="Psicológico">
+          <Tab
+            eventKey={2}
+            title="Psicológico"
+            style={{ backgroundColor: "#f8f9fc" }}
+          >
             <Row>
               <Col sm={6}>
                 <h5
