@@ -41,6 +41,8 @@ import {
   poblacionFemale,
   indiceProblemas,
   indiceSecciones,
+  indiceServicios,
+  indiceGastos
 } from "./data";
 import "./App.css";
 import {
@@ -594,6 +596,40 @@ function App() {
                   <Col>
                     <ResponsiveContainer width="100%" height={300}>
                       <BarChart width={600} height={300} data={indiceProblemas}>
+                        <CartesianGrid strokeDasharray="3 3" />
+                        <XAxis dataKey="name" />
+                        <YAxis />
+                        <Tooltip />
+                        <Legend />
+                        <Bar dataKey="porcentaje" fill="#8884d8" />
+                      </BarChart>
+                    </ResponsiveContainer>
+                  </Col>
+                </Row>
+                <Row className="mt-4">
+                  <h5 style={{ color: "#8884d8" }} className="text-center">
+                    Gasto del ayuntamiento de Ciudad Juárez
+                  </h5>
+                  <Col>
+                    <ResponsiveContainer width="100%" height={300}>
+                      <BarChart width={600} height={300} data={indiceGastos}>
+                        <CartesianGrid strokeDasharray="3 3" />
+                        <XAxis dataKey="name" />
+                        <YAxis />
+                        <Tooltip />
+                        <Legend />
+                        <Bar dataKey="total" fill="#8884d8" />
+                      </BarChart>
+                    </ResponsiveContainer>
+                  </Col>
+                </Row>
+                <Row className="mt-4">
+                  <h5 style={{ color: "#8884d8" }} className="text-center">
+                    Satisfacción con la calidad de servicios en Ciudad Juárez
+                  </h5>
+                  <Col>
+                    <ResponsiveContainer width="100%" height={300}>
+                      <BarChart width={600} height={300} data={indiceServicios}>
                         <CartesianGrid strokeDasharray="3 3" />
                         <XAxis dataKey="name" />
                         <YAxis />
