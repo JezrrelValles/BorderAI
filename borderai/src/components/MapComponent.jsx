@@ -16,6 +16,7 @@ import {
   distritosElectoralesLocales,
   indiceSecciones,
   datosVotos,
+  indiceServicios,
 } from "../data";
 import "leaflet/dist/leaflet";
 
@@ -88,6 +89,17 @@ const MapComponent = (props) => {
               item[0],
             ]);
 
+            const agua = indiceServicios[0].calidad;
+            const electrica = indiceServicios[1].calidad;
+            const alumbrado = indiceServicios[2].calidad;
+            const ecobus = indiceServicios[3].calidad;
+            const basura = indiceServicios[4].calidad;
+            const senales = indiceServicios[5].calidad;
+            const semaforizacion = indiceServicios[6].calidad;
+            const verdes = indiceServicios[7].calidad;
+            const ruteras = indiceServicios[8].calidad;
+            const calles = indiceServicios[9].calidad;
+
             return (
               <Polygon
                 pathOptions={{
@@ -100,7 +112,33 @@ const MapComponent = (props) => {
                 }}
                 positions={coordinates}
               >
-                <Popup>Distrito 5</Popup>
+                <Popup>
+                  <div>
+                    Satisfacción de servicios
+                      <br />
+                      Distrito: 5
+                      <br />
+                      Agua: {agua ?? "N/A"}
+                      <br />
+                      Energía eléctrica: {electrica ?? "N/A"}
+                      <br />
+                      Alumbrado: {alumbrado ?? "N/A"}
+                      <br />
+                      Ecobús: {ecobus ?? "N/A"}
+                      <br />
+                      Recolección de basura: {basura ?? "N/A"}
+                      <br />
+                      Señales viales: {senales ?? "N/A"}
+                      <br />
+                      Semaforización: {semaforizacion ?? "N/A"}
+                      <br />
+                      Áreas verdes: {verdes ?? "N/A"}
+                      <br />
+                      Ruteras: {ruteras ?? "N/A"}
+                      <br />
+                      Calles y pavimentación: {calles ?? "N/A"}
+                  </div>
+                </Popup>
               </Polygon>
             );
           })}
