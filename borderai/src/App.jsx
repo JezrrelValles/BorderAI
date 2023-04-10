@@ -126,14 +126,13 @@ function App() {
                   zIndex: 2,
                 }}
               >
-                <MapComponent category={"politico"} />
+                <MapComponent category={"demografico"} />
               </Col>
               <Col
                 xs={12}
                 md={6}
                 style={{
                   width: "100%",
-                  height: "50vh",
                 }}
               >
                 <h5
@@ -220,7 +219,7 @@ function App() {
                     </Card.Footer>
                   </Card>
                 </CardGroup>
-                <Row>
+                <Row className="mt-4">
                   <Col>
                     <h5
                       style={{
@@ -242,15 +241,41 @@ function App() {
                     </ResponsiveContainer>
                   </Col>
                 </Row>
-                <Row>
+                <Row className="mt-4">
+                  <h5
+                    style={{
+                      color: "#8884d8",
+                    }}
+                    className="text-center"
+                  >
+                    Rango de población total
+                  </h5>
+                  <Col>
+                    <EmbudoChart data={poblacionTotal} />
+                  </Col>
+                </Row>
+                <Row className="mt-4">
+                  <h5
+                    style={{
+                      color: "#8884d8",
+                    }}
+                    className="text-center"
+                  >
+                    Rango de población masculina total
+                  </h5>
                   <Col>
                     <EmbudoChart data={poblacionMale} />
                   </Col>
                 </Row>
-                <Row>
-                  <Col>
-                    <EmbudoChart data={poblacionTotal} />
-                  </Col>
+                <Row className="mt-4">
+                  <h5
+                    style={{
+                      color: "#8884d8",
+                    }}
+                    className="text-center"
+                  >
+                    Rango de población femenina total
+                  </h5>
                   <Col>
                     <EmbudoChart data={poblacionFemale} />
                   </Col>
@@ -387,7 +412,25 @@ function App() {
             style={{ backgroundColor: "#f8f9fc" }}
           >
             <Row>
-              <Col sm={6}>
+              <Col
+                xs={12}
+                md={6}
+                style={{
+                  width: "100%",
+                  height: "50vh",
+                  position: "relative",
+                  zIndex: 2,
+                }}
+              >
+                <MapComponent category={"politico"} />
+              </Col>
+              <Col
+                xs={12}
+                md={6}
+                style={{
+                  width: "100%",
+                }}
+              >
                 <h5
                   style={{
                     color: "#8884d8",
@@ -548,20 +591,19 @@ function App() {
                   <h5 style={{ color: "#8884d8" }} className="text-center">
                     Principales problemas en Ciudad Juárez
                   </h5>
-                  <Col xs={4}>
-                    <BarChart width={600} height={300} data={indiceProblemas}>
-                      <CartesianGrid strokeDasharray="3 3" />
-                      <XAxis dataKey="name" />
-                      <YAxis />
-                      <Tooltip />
-                      <Legend />
-                      <Bar dataKey="porcentaje" fill="#8884d8" />
-                    </BarChart>
+                  <Col>
+                    <ResponsiveContainer width="100%" height={300}>
+                      <BarChart width={600} height={300} data={indiceProblemas}>
+                        <CartesianGrid strokeDasharray="3 3" />
+                        <XAxis dataKey="name" />
+                        <YAxis />
+                        <Tooltip />
+                        <Legend />
+                        <Bar dataKey="porcentaje" fill="#8884d8" />
+                      </BarChart>
+                    </ResponsiveContainer>
                   </Col>
                 </Row>
-              </Col>
-              <Col>
-                <MapComponent category={"psicologico"} />
               </Col>
             </Row>
           </Tab>
