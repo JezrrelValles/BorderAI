@@ -17,6 +17,8 @@ import {
   indiceSecciones,
   datosVotos,
   indiceServicios,
+  datos2016,
+  datosVotos2016,
 } from "../data";
 import "leaflet/dist/leaflet";
 
@@ -115,28 +117,28 @@ const MapComponent = (props) => {
                 <Popup>
                   <div>
                     Satisfacción de servicios
-                      <br />
-                      Distrito: 5
-                      <br />
-                      Agua: {agua ?? "N/A"}
-                      <br />
-                      Energía eléctrica: {electrica ?? "N/A"}
-                      <br />
-                      Alumbrado: {alumbrado ?? "N/A"}
-                      <br />
-                      Ecobús: {ecobus ?? "N/A"}
-                      <br />
-                      Recolección de basura: {basura ?? "N/A"}
-                      <br />
-                      Señales viales: {senales ?? "N/A"}
-                      <br />
-                      Semaforización: {semaforizacion ?? "N/A"}
-                      <br />
-                      Áreas verdes: {verdes ?? "N/A"}
-                      <br />
-                      Ruteras: {ruteras ?? "N/A"}
-                      <br />
-                      Calles y pavimentación: {calles ?? "N/A"}
+                    <br />
+                    Distrito: 5
+                    <br />
+                    Agua: {agua ?? "N/A"}
+                    <br />
+                    Energía eléctrica: {electrica ?? "N/A"}
+                    <br />
+                    Alumbrado: {alumbrado ?? "N/A"}
+                    <br />
+                    Ecobús: {ecobus ?? "N/A"}
+                    <br />
+                    Recolección de basura: {basura ?? "N/A"}
+                    <br />
+                    Señales viales: {senales ?? "N/A"}
+                    <br />
+                    Semaforización: {semaforizacion ?? "N/A"}
+                    <br />
+                    Áreas verdes: {verdes ?? "N/A"}
+                    <br />
+                    Ruteras: {ruteras ?? "N/A"}
+                    <br />
+                    Calles y pavimentación: {calles ?? "N/A"}
                   </div>
                 </Popup>
               </Polygon>
@@ -235,7 +237,10 @@ const MapComponent = (props) => {
                 return (
                   <Polygon
                     pathOptions={{
-                      fillColor: "#A6C04B",
+                      fillColor: pan > morena && pan > pri ? "#06338E" :
+                      morena > pan && morena > pri ? "#AC241C" :
+                      pri > pan && pri > morena ? "#00923F" :
+                      "#EDEDED",
                       fillOpacity:
                         votacionTotal >= 6000
                           ? 1
@@ -327,6 +332,86 @@ const MapComponent = (props) => {
                 >
                   <Popup>
                     {type}, {name}
+                  </Popup>
+                </Polygon>
+              );
+            })}
+          </FeatureGroup>
+        </LayersControl.Overlay>
+        <LayersControl.Overlay name="Histórico">
+          <FeatureGroup>
+            {seccionesDistrito5.features.map((coord) => {
+              const coordinates = coord.geometry.coordinates.map((item) => [
+                item[1],
+                item[0],
+              ]);
+
+              const name = coord.properties.name;
+
+              const pan2 = datosVotos2016.find(
+                (item) => item.seccion === name
+              )?.pan;
+              const coalicion = datosVotos2016.find(
+                (item) => item.seccion === name
+              )?.coalicion_pri_pvem_pt_panal;
+              const morena = datosVotos2016.find(
+                (item) => item.seccion === name
+              )?.morena;
+              const votosNulos = datosVotos2016.find(
+                (item) => item.seccion === name
+              )?.votos_nulos;
+              const votacionTotal = datosVotos2016.find(
+                (item) => item.seccion === name
+              )?.votacion_total;
+
+              return (
+                <Polygon
+                  pathOptions={{
+                    fillColor: "#06338e",
+                    fillOpacity:
+                      votacionTotal >= 3700
+                        ? 1
+                        : votacionTotal >= 1500
+                        ? 0.9
+                        : votacionTotal >= 1000
+                        ? 0.8
+                        : votacionTotal >= 750
+                        ? 0.7
+                        : votacionTotal >= 500
+                        ? 0.6
+                        : votacionTotal >= 250
+                        ? 0.5
+                        : votacionTotal >= 100
+                        ? 0.4
+                        : votacionTotal >= 50
+                        ? 0.3
+                        : votacionTotal >= 24
+                        ? 0.2
+                        : 0.1,
+                    weight: 2,
+                    opacity: 1,
+                    dashArray: "2",
+                    color: "#252627",
+                  }}
+                  positions={coordinates}
+                >
+                  <Popup>
+                    <div>
+                      <h5>
+                        Distrito: 5<br />
+                        Sección: {name}
+                        <br />
+                        PAN: {pan2 ?? "N/A"}
+                        <br />
+                        PRI-PVEM-PT-PANAL: {coalicion ?? "N/A"}
+                        <br />
+                        MORENA: {morena ?? "N/A"}
+                        <br />
+                        Votos nulos: {votosNulos ?? "N/A"}
+                        <br />
+                        Votación total: {votacionTotal ?? "N/A"}
+                      </h5>
+                    </div>
                   </Popup>
                 </Polygon>
               );
