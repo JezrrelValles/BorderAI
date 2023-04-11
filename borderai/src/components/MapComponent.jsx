@@ -213,15 +213,15 @@ const MapComponent = (props) => {
                   </Polygon>
                 );
               } else if (category === "politico") {
-                const pan = datosVotos.find(
+                const pan = parseInt(datosVotos.find(
                   (item) => item.seccion === name
-                )?.pan;
-                const pri = datosVotos.find(
+                )?.pan, 10);
+                const pri = parseInt(datosVotos.find(
                   (item) => item.seccion === name
-                )?.pri;
-                const morena = datosVotos.find(
+                )?.pri, 10);
+                const morena = parseInt(datosVotos.find(
                   (item) => item.seccion === name
-                )?.morena;
+                )?.morena, 10);
 
                 const votosNulos = datosVotos.find(
                   (item) => item.seccion === name
@@ -230,17 +230,11 @@ const MapComponent = (props) => {
                   (item) => item.seccion === name
                 )?.votacion_total;
 
-                // const participacion = datos.find(
-                //   (item) => item.seccion === name
-                // )?.porcentaje_participacion;
-
                 return (
                   <Polygon
                     pathOptions={{
-                      fillColor: pan > morena && pan > pri ? "#06338E" :
-                      morena > pan && morena > pri ? "#AC241C" :
-                      pri > pan && pri > morena ? "#00923F" :
-                      "#EDEDED",
+                      fillColor: pan > pri && pan > morena ? "#06338e" : 
+                      pri > pan && pri > morena ? "#00923f" : "#ac241c",
                       fillOpacity:
                         votacionTotal >= 6000
                           ? 1
@@ -348,15 +342,15 @@ const MapComponent = (props) => {
 
               const name = coord.properties.name;
 
-              const pan2 = datosVotos2016.find(
+              const pan = parseInt(datosVotos2016.find(
                 (item) => item.seccion === name
-              )?.pan;
-              const coalicion = datosVotos2016.find(
+              )?.pan, 10); // El segundo argumento 10 especifica la base numérica (decimal en este caso)
+              const coalicion = parseInt(datosVotos2016.find(
                 (item) => item.seccion === name
-              )?.coalicion_pri_pvem_pt_panal;
-              const morena = datosVotos2016.find(
+              )?.coalicion_pri_pvem_pt_panal, 10);
+              const morena = parseInt(datosVotos2016.find(
                 (item) => item.seccion === name
-              )?.morena;
+              )?.morena, 10);
               const votosNulos = datosVotos2016.find(
                 (item) => item.seccion === name
               )?.votos_nulos;
@@ -367,7 +361,8 @@ const MapComponent = (props) => {
               return (
                 <Polygon
                   pathOptions={{
-                    fillColor: "#06338e",
+                    fillColor: pan > coalicion && pan > morena ? "#06338e" : 
+                    coalicion > pan && coalicion > morena ? "#00923f" : "#ac241c",
                     fillOpacity:
                       votacionTotal >= 3700
                         ? 1
@@ -401,7 +396,7 @@ const MapComponent = (props) => {
                         Distrito: 5<br />
                         Sección: {name}
                         <br />
-                        PAN: {pan2 ?? "N/A"}
+                        PAN: {pan ?? "N/A"}
                         <br />
                         PRI-PVEM-PT-PANAL: {coalicion ?? "N/A"}
                         <br />
