@@ -43,7 +43,7 @@ import {
   indiceSecciones,
   indiceServicios,
   indiceGastos
-} from "./data";
+} from "./ine";
 import "./App.css";
 import {
   Bar,

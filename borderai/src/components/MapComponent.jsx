@@ -12,14 +12,18 @@ import {
   colonias,
   distrito5,
   seccionesDistrito5,
+  secciones,
+  distritosElectoralesLocales
+} from "../data";
+import {
   datos,
-  distritosElectoralesLocales,
   indiceSecciones,
   datosVotos,
   indiceServicios,
   datos2016,
   datosVotos2016,
-} from "../data";
+  poblacionSecciones,
+} from "../ine";
 import "leaflet/dist/leaflet";
 
 const MapComponent = (props) => {
@@ -147,7 +151,7 @@ const MapComponent = (props) => {
         </LayersControl.Overlay>
         <LayersControl.Overlay name="Secciones">
           <FeatureGroup>
-            {seccionesDistrito5.features.map((coord) => {
+            {secciones.features.map((coord) => {
               const coordinates = coord.geometry.coordinates.map((item) => [
                 item[1],
                 item[0],
@@ -156,38 +160,47 @@ const MapComponent = (props) => {
               const name = coord.properties.name;
 
               if (category === "demografico") {
-                const poblacion = indiceSecciones.find(
-                  (item) => item.seccion === name
-                )?.poblacion;
-                const poblacionFemenina = indiceSecciones.find(
-                  (item) => item.seccion === name
-                )?.poblacionFemenina;
-                const poblacionMasculina = indiceSecciones.find(
-                  (item) => item.seccion === name
-                )?.poblacionMasculina;
+                const poblacion = poblacionSecciones.find(
+                  (item) => item.SECCION === name
+                )?.POBTOT;
+                const poblacionFemenina = poblacionSecciones.find(
+                  (item) => item.SECCION === name
+                )?.POBFEM;
+                const poblacionMasculina = poblacionSecciones.find(
+                  (item) => item.SECCION === name
+                )?.POBMAS;
+                const poblacion18a24 = poblacionSecciones.find(
+                  (item) => item.SECCION === name
+                )?.P_18YMAS;
+                const poblacion18a24F = poblacionSecciones.find(
+                  (item) => item.SECCION === name
+                )?.P_18YMAS_F;
+                const poblacion18a24M = poblacionSecciones.find(
+                  (item) => item.SECCION === name
+                )?.P_18YMAS_M;
 
                 return (
                   <Polygon
                     pathOptions={{
                       fillColor: "#A6C04B",
                       fillOpacity:
-                        poblacion >= 6092
+                        poblacion >= 3000
                           ? 1
-                          : poblacion >= 4874
+                          : poblacion >= 2500
                           ? 0.9
-                          : poblacion >= 3655
+                          : poblacion >= 2000
                           ? 0.8
-                          : poblacion >= 2437
+                          : poblacion >= 1000
                           ? 0.7
-                          : poblacion >= 1218
+                          : poblacion >= 800
                           ? 0.6
-                          : poblacion >= 609
+                          : poblacion >= 600
                           ? 0.5
-                          : poblacion >= 305
+                          : poblacion >= 400
                           ? 0.4
-                          : poblacion >= 153
+                          : poblacion >= 200
                           ? 0.3
-                          : poblacion >= 76
+                          : poblacion >= 100
                           ? 0.2
                           : 0.1,
                       weight: 2,
@@ -207,6 +220,12 @@ const MapComponent = (props) => {
                           Población femenina: {poblacionFemenina ?? "N/A"}
                           <br />
                           Población masculina: {poblacionMasculina ?? "N/A"}
+                          <br />
+                          Población +18 total: {poblacion18a24 ?? "N/A"}
+                          <br />
+                          Población +18 femenina: {poblacion18a24F ?? "N/A"}
+                          <br />
+                          Población +18 masculina: {poblacion18a24M ?? "N/A"}
                         </h5>
                       </div>
                     </Popup>
@@ -222,6 +241,9 @@ const MapComponent = (props) => {
                 const morena = parseInt(datosVotos.find(
                   (item) => item.seccion === name
                 )?.morena, 10);
+                const mc = parseInt(datosVotos.find(
+                  (item) => item.seccion === name
+                )?.mc, 10);
 
                 const votosNulos = datosVotos.find(
                   (item) => item.seccion === name
@@ -236,23 +258,23 @@ const MapComponent = (props) => {
                       fillColor: pan > pri && pan > morena ? "#06338e" : 
                       pri > pan && pri > morena ? "#00923f" : "#ac241c",
                       fillOpacity:
-                        votacionTotal >= 6000
+                        votacionTotal >= 1000
                           ? 1
-                          : votacionTotal >= 3000
-                          ? 0.9
-                          : votacionTotal >= 1500
-                          ? 0.8
                           : votacionTotal >= 750
+                          ? 0.9
+                          : votacionTotal >= 500
+                          ? 0.8
+                          : votacionTotal >= 400
                           ? 0.7
-                          : votacionTotal >= 375
+                          : votacionTotal >= 300
                           ? 0.6
-                          : votacionTotal >= 188
+                          : votacionTotal >= 200
                           ? 0.5
-                          : votacionTotal >= 94
+                          : votacionTotal >= 100
                           ? 0.4
-                          : votacionTotal >= 47
+                          : votacionTotal >= 50
                           ? 0.3
-                          : votacionTotal >= 24
+                          : votacionTotal >= 25
                           ? 0.2
                           : 0.1,
                       weight: 2,
@@ -265,7 +287,6 @@ const MapComponent = (props) => {
                     <Popup>
                       <div>
                         <h5>
-                          Distrito: 5<br />
                           Sección: {name}
                           <br />
                           PAN: {pan ?? "N/A"}

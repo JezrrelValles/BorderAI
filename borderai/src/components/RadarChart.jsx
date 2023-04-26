@@ -8,7 +8,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import { resultados_1683 } from "../data";
+import { resultados_1683 } from "../ine";
 
 const RadChart = () => {
   return (

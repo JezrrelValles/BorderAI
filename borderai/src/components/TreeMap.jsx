@@ -1,6 +1,6 @@
 import React from "react";
 import { Treemap } from "recharts";
-import { datos } from "../data"
+import { datos } from "../ine"
 
 const data = [
   {
