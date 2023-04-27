@@ -22,7 +22,8 @@ import {
   distrito8,
   distrito9,
   distrito10,
-  seccionesdistrito4
+  seccionesdistrito4,
+  distritosElectoralesFederales
 } from "../data";
 import {
   datos,
@@ -71,7 +72,7 @@ const MapComponent = (props) => {
         </LayersControl.Overlay>
         <LayersControl.Overlay name="Distritos Electorales Federales">
           <FeatureGroup>
-            {distritosElectoralesLocales.features.map((coord) => {
+            {distritosElectoralesFederales.features.map((coord) => {
               const coordinates = coord.geometry.coordinates.map((item) => [
                 item[1],
                 item[0],
